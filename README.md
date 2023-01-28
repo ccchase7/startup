@@ -11,4 +11,4 @@ Features:
 -	You can send the ones you want to
 -	Potential guess-the-word games
 
-[Startup spec .pdf](https://github.com/ccchase7/startup/files/10525312/Startup.spec.pdf)
+![image](https://user-images.githubusercontent.com/86387210/215242679-aad0e8c5-fd7e-40f7-ba82-8f8528abe752.png)
