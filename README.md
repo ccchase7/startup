@@ -1,5 +1,12 @@
 # startup
 Startup project for CS 260
 
-Github assignment:
-    Github allows me to have several versions of my code and to go back to whichever one I want to when I need to.  It also allows me to mix different versions or changes and end up with just one version.  I think it is really nifty that I can do it all from VS Code and it's all hooked up already.  I also learned that I'll have to review the changes when there is a conflict between two commits, and that there are a lot of checks to make sure I really want to be committing all the stuff that I end up putting up there.
+I clone trashy China cats.
+Not really. But the cool thing is, if you mix up all the letters in that sentence, you can spell out my full name.  Imagine a website where you could just type in your name, or maybe someone else’s name, or any word or sentence really, and find out what else those letters would spell! That’s what my startup is all about: anagrams. I’m not saying they’ll be very good, but we’ll find you one if there is one. On the website, you’ll enter some letters and it’ll give you an anagram. You’ll be able to log in, save your favorite ones for later, send the good ones to your buddies (or your grandma), and maybe even more!
+Features:
+-	Secure login over HTTPS
+-	It’ll give you an anagram
+-	You can save your favorites
+-	User-friendly display
+-	You can send the ones you want to
+-	Potential guess-the-word games
