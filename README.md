@@ -10,3 +10,5 @@ Features:
 -	User-friendly display
 -	You can send the ones you want to
 -	Potential guess-the-word games
+
+[Startup spec .pdf](https://github.com/ccchase7/startup/files/10525312/Startup.spec.pdf)
