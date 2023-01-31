@@ -11,4 +11,5 @@ Features:
 -	You can send the ones you want to
 -	Potential guess-the-word games
 
-![image](https://user-images.githubusercontent.com/86387210/215242679-aad0e8c5-fd7e-40f7-ba82-8f8528abe752.png)
+Accesible at 18.188.213.187 (for now).
+
