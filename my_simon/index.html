@@ -9,20 +9,47 @@
         <link rel="icon" href="simon_icon.ico" />
     </head>
     <body>
-        <header>MySimon<sup><span>Knockoff of Simon<sup>&reg</sup></span></header>
+        <header>
+            <h1>MySimon<sup><span>Knockoff of Simon<sup>&reg</sup></span></h1>
 
-        <!-- How to get to other pages -->
-      <nav>
-        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="play.html">Play</a></li>
-          <li><a href="scores.html">Scores</a></li>
-          <li><a href="about.html">About</a></li>
-        </menu>
-      </nav>
+                <!-- How to get to other pages -->
+            <nav>
+                <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+                <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="play.html">Play</a></li>
+                <li><a href="scores.html">Scores</a></li>
+                <li><a href="about.html">About</a></li>
+                </menu>
+            </nav>
+
+            <!--The hr draws a line to separate different parts of the page-->
+            <hr />
+        </header>
+
+        <main>
+            <h1>Welcome</h1>
+            <p>Login to play</p>
+            <form method="get" action="play.html">
+                <!--The label has a "for" attribute that associates it with the text box
+                by saying it is for the id of the text box-->
+              <label for="name">Username</label>
+              <input type="text" id="name" placeholder="Your name here" />
+              <button type="submit">Login</button>
+            </form>
+          </main>
 
     </body>
+    <footer>
+        <hr />
+        <hr />
+        <span class="text-reset">Author Name(s)</span>
+        <!--br is a break-->
+        <br />
+        <a href="https://github.com/ccchase7/startup.git">GitHub</a>
+        <br />
+        <a href="https://github.com/webprogramming260/simon-html">Original</a>
+    </footer>
 
 
 </html>
