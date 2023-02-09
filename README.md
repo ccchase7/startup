@@ -21,16 +21,16 @@ Changing the website once it's up:
     2. Push them to github
     3. pull them to the amazon console
     4. deploy them using the deployment script
-
+<br />
 Simon:
-    - Use <nav> to help the user navigate from one page to another.
-    - The links should relate to other html pages. You should probably have a <nav> in
+    - Use < nav> to help the user navigate from one page to another.
+    - The links should relate to other html pages. You should probably have a < nav> in
     all of your pages that helps the user get back to the home or at least get to
     the next place they will need to go.
-    - <nav> is for internal "links", while <a href=""> is for external links.
+    - < nav> is for internal "links", while < a href=""> is for external links.
     - Name the label and say it is "for" the id of the thing that it is for.
-    - <br /> and <hr /> are to help organize and separate paragraphs and sections of your page
-    - At the top of the page, you can include <meta> stuff that defines some of the general
+    - < b r /> and < h r /> are to help organize and separate paragraphs and sections of your page
+    - At the top of the page, you can include < meta> stuff that defines some of the general
     characteristics of your page
     - Also, for some reason if you put an "_" in the name of your tab icon, it won't recognize it
     and you'll be severely disappointed until you figure it out.
