@@ -11,5 +11,14 @@ Features:
 -	You can send the ones you want to
 -	Potential guess-the-word games
 
-Accesible at 18.188.213.187 (for now).
+Accesible at claytoncchase.com (18.188.213.187)
+
+HTML:
+    Separate it into sections even though you don't necessarily have to, since it'll give the webpage more structure and help out with organization and non-visual functionality.
+
+Changing the website once it's up:
+    1. Make the changes you want.
+    2. Push them to github
+    3. pull them to the amazon console
+    4. deploy them using the deployment script
 
