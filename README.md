@@ -21,7 +21,7 @@ Changing the website once it's up:
     2. Push them to github
     3. pull them to the amazon console
     4. deploy them using the deployment script
-<br />
+<hr />
 Simon:
     - Use < nav> to help the user navigate from one page to another.
     - The links should relate to other html pages. You should probably have a < nav> in
