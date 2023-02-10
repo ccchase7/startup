@@ -35,3 +35,11 @@ Simon:
     - Also, for some reason if you put an "_" in the name of your tab icon, it won't recognize it
     and you'll be severely disappointed until you figure it out.
 
+Deploying Simon:
+    - Make sure everything you want to deploy has been committed and pushed up to github
+    - Pull or clone it down on your amazon account
+    - make sure the permissions on the deploy script are correct. If you can't execute it
+    you might have to give execute permissions using chmod a+x "file"
+    - Run the deployment script. That will make it so when you go to the simon part of your
+    website, caddy will send the files associated with your simon app
+
