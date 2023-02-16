@@ -43,3 +43,14 @@ Deploying Simon:
     - Run the deployment script. That will make it so when you go to the simon part of your
     website, caddy will send the files associated with your simon app
 
+Flex:
+    - the flex number indicates how many "units" of space it should have. This number is relative
+    to the total number of flex units defined in the subdivision.
+    - To the right of the flex number, you can also indicate a starting height. If you want something
+    to have a fixed height, give it a flex number of 0 and then indicate the starting height.
+    - You can also include a flex-direction (ex. column or row, column-reverse or row-reverse) property
+    to indicate what the main axis will be. So if you say row, then things will go on a horizontal axis
+    left to right (they'll be separated into columns, but the main axis will be a row.)
+
+
+
