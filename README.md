@@ -52,5 +52,28 @@ Flex:
     to indicate what the main axis will be. So if you say row, then things will go on a horizontal axis
     left to right (they'll be separated into columns, but the main axis will be a row.)
 
+User Experience:
+    - Think of your User Interface as a story. Why are they using your service? What will satisfy them?
+    - Consistent with other experiences so they know what to do, but different enough that it's interesting.
+    - Breadcrumb: displays the path of how you got to where you are.
+    - Choose a good COLOR scheme! Probably include a primary, secondary, and focus color and keep it
+    consistent. Consider using Paletton and Adobe to pick a color scheme.
+    - FONTS: Probably stick to 3 or less fonts and be consistent in how you use them. Also, keep your font
+    sizing consistent.
+        - em means the width of the character 'm' in that font. That's how you describe line length.
+    - Use ICONS for the right things.
+    - Try to set everything up to be used INTERNATIONALLY. That means your right-left can easily switch
+    to left-right, things can be translated, and dates account for time zones.
+    - Space / whitespace can be good for creating focus and decreasing the effort needed to understant
+    something.
+    - Interaction, Images, and Animation make your product interesting.
+    - Avoid DECISION fatigue: don't present them with all the options at once, just a few at a time, so
+    they don't get overwhelmed.
+    - Performance: after 1-5 seconds of waiting, the probability that they'll leave increases 90%. etc.
+    So that means you should try your best not to keep them waiting.
+        -Short circuit: If something goes wrong or takes too long, the user should still be able to do a lot.
+    - WALLS: something that hinders the User Experience.  Complexity, payment, failure, security (too high or
+    too low), or legal.
+
 
 
