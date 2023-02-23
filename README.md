@@ -97,5 +97,15 @@ User Experience:
     - WALLS: something that hinders the User Experience.  Complexity, payment, failure, security (too high or
     too low), or legal.
 
+Notes from Simon CSS:
+    - Instead of trying to make the html format your buttons, it's a lot easier to do it in the css file
+    - min-width is the smallest you ever want it to go even when the window shrinks
+    - position: absolute; will make it so the object doesn't take up any room in the layout, so it's nice
+    when you want something to just stay at one place the whole time and not worry about making everything
+    else fit around it.
+    - a lot of the time, the bootstrap keyword will be in the class name, and you can put more than one in
+    there and they'll compound on each other.
+    - It is a lot more useful than I thought to give something a class name and use that as the reference in
+    the css file.
 
 
