@@ -2,15 +2,20 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    height: 100vh;
+}
+
+main {
+    flex: 5 calc(100vh - 120px);
 }
 
 header {
-    flex: 0 80px;
+    flex: 1 90px;
     padding: 1em;
 }
 
 menu {
-    flex: 1;
+    flex: 0;
     display: flex;
     flex-direction: row !important;
     list-style: none;
@@ -22,7 +27,8 @@ menu .nav-item {
 }
 
 footer {
-    flex: 0 30px;
+    flex: 1 30px;
+    padding: 2em;
 }
 
 footer a {
@@ -46,11 +52,11 @@ footer a {
     box-shadow: 0 0 20px 5px rgb(69, 69, 69);
     width: 80vw;
     height: 80vw;
-    position: absolute;
     min-width: 350px;
     min-height: 350px;
     max-width: min(80vmin, 1000px);
     max-height: min(80vmin, 1000px);
+    transform: translateX(50%);
   }
   
   .button-container {
@@ -59,6 +65,7 @@ footer a {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    
   }
   
   .button-top-left {
@@ -139,5 +146,19 @@ footer a {
     }
     main {
       flex: 1 100vh;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .game {
+        width: 50vh;
+        height: 50vw;
+        min-width: 150px;
+        min-height: 150px;
+    }
+
+    .controls {
+        width: 24vh;
+        height: 24vh;
     }
   }
