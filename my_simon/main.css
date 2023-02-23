@@ -26,6 +26,19 @@ menu .nav-item {
     padding: 0 0.3em;
 }
 
+#play-nav {
+    transform: translateY(-59%);    
+}
+
+header > nav {
+    padding: 3em;
+}
+
+#play-header {
+    height: 90px;
+}
+
+
 footer {
     flex: 1 30px;
     padding: 2em;
