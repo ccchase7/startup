@@ -22,6 +22,7 @@ Changing the website once it's up:
     3. pull them to the amazon console
     4. deploy them using the deployment script
 <hr />
+
 Simon:
     - Use < nav> to help the user navigate from one page to another.
     - The links should relate to other html pages. You should probably have a < nav> in
@@ -43,14 +44,35 @@ Deploying Simon:
     - Run the deployment script. That will make it so when you go to the simon part of your
     website, caddy will send the files associated with your simon app
 
-Flex:
-    - the flex number indicates how many "units" of space it should have. This number is relative
-    to the total number of flex units defined in the subdivision.
-    - To the right of the flex number, you can also indicate a starting height. If you want something
-    to have a fixed height, give it a flex number of 0 and then indicate the starting height.
-    - You can also include a flex-direction (ex. column or row, column-reverse or row-reverse) property
-    to indicate what the main axis will be. So if you say row, then things will go on a horizontal axis
-    left to right (they'll be separated into columns, but the main axis will be a row.)
+CSS:
+    General:
+        Selectors:
+            - Used to declare which elements you want the following css rules to apply to.
+            - Class selector: a period before the class name. .class
+            - Also, element.class selects all items of that class that are children of that element.
+            - #id   element[attributes ]
+                Pseudo Selectors:
+                    - changes attributes of an element based on actions (like hover) rather than name/class...
+                    - :hover    :visited    :checked
+
+    Layout:
+        Grid:
+            - display: grid; grid-template-columns: repeat(auto-fill, minmax(minimumpx, 1fr)); grid-auto-rows: Xpx;
+                grid-gap: Xem;
+                - fr is a fractional unit (it splits up the parent into equal parts)
+            - For when you want to display a group of child elements in a grid.
+            - maybe use ^div^. define class for outer (container) and children.
+
+        Flex:
+            -* You should specify how much room you want the whole thing (or just parts of it) to take using
+            the "height:" attribute. Ex. height: 100vh;
+            - the flex number indicates how many "units" of space it should have. This number is relative
+            to the total number of flex units defined in the subdivision.
+            - To the right of the flex number, you can also indicate a starting height. If you want something
+            to have a fixed height, give it a flex number of 0 and then indicate the starting height.
+            - You can also include a flex-direction (ex. column or row, column-reverse or row-reverse) property
+            to indicate what the main axis will be. So if you say row, then things will go on a horizontal axis
+            left to right (they'll be separated into columns, but the main axis will be a row.)
 
 User Experience:
     - Think of your User Interface as a story. Why are they using your service? What will satisfy them?

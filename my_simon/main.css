@@ -18,3 +18,21 @@ menu {
 menu .nav-item {
     padding: 0 0.3em;
 }
+
+footer {
+    flex: 0 30px;
+}
+
+footer a {
+    float: right;
+}
+
+.players {
+    flex: 1;
+    width: 100%;
+    padding: 0.5em;
+  }
+  
+  .player-name {
+    color: rgb(49, 158, 67);
+  }
