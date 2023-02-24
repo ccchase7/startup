@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2em;
+    padding-left: 2em;
+    height: 100vh;
+    background-color: #ffebc2;
+}
+
+header {
+    flex: 0 100px;
+}
+
+main {
+    flex: 4;
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    flex: 2;
+    background-color: #5480e6;
+}
+
+.main-content {
+    flex: 9;
+    background-color: #8d99b4;
+}
+
+footer {
+    flex: 1;
+}
+
+.bookend {
+    background-color: #747881;
+}
