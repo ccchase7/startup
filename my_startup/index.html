@@ -30,9 +30,19 @@
             <div id="main-title"><p id="main-title-text">Main Content</p></div>
             <hr />
             <div id="input-string" ><textarea id="input-textbox" class="form-control">Input String</textarea></div>
-            <div id="button-area"><button id="input-button"></button></div>
+            <div id="button-area">
+                <div class="button-group">
+                    <button type="button" class="btn btn-outline-primary">Generate</button>
+                    <button type="button" class="btn btn-outline-light">Retry</button>
+                </div>
+            </div>
             <hr />
-            <div id="card-area"></div>
+            <div id="answer-area">
+                <div class="form-group yellow-border">
+                    <label for="answer-text">Answer:</label>
+                    <textarea readonly class="form-control" id="answer-text" rows="1"></textarea>
+                </div>
+            </div>
         </div>
 
         <div class="extra">

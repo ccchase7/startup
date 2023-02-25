@@ -58,14 +58,36 @@ main {
     width: 40%;
     height: 50%;
     margin: 0 auto;
+    text-align: center;
 }
 
 #button-area {
     flex: 2;
 }
 
-#card-area {
+b {
+    transform: translate(-213%, -50%);
+}
+
+.button-group {
+    transform: translate(-13.4%, -50%);
+}
+
+#answer-area {
     flex: 9;
+    margin: 0 auto;
+}
+
+#answer-area > * {
+    transform: translate(-75%, 0);
+}
+
+#answer-area label {
+    transform: translate(-115%, 0);
+}
+
+#answer-text {
+    width: 252%;
 }
 
 footer {
