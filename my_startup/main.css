@@ -1,15 +1,20 @@
+* {
+    font-family: 'Exo', sans-serif;
+}
+
 body {
     display: flex;
     flex-direction: column;
     padding-right: 2em;
     padding-left: 2em;
     height: 100vh;
-    background-color: #ffebc2;
+    background-color: #02caf2;
 }
 
 header {
     flex: 0 100px;
     text-align: center;
+    justify-content: center;
 }
 
 main {
@@ -22,7 +27,7 @@ main {
 .sidebar {
     flex: 3;
     text-align: center;
-    background-color: #5480e6;
+    background-color: #557178;
 }
 
 .main-content {
@@ -35,7 +40,7 @@ main {
 .extra {
     flex: 2;
     text-align: center;
-    background-color: orange;
+    background-color: #c1a588;
 }
 
 .main-content div {
@@ -98,7 +103,7 @@ footer {
 }
 
 .bookend {
-    background-color: #8e9199;
+    background-color: #1f8da7;
 }
 
 @media (max-height: 600px) {
