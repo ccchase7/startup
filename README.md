@@ -108,4 +108,16 @@ Notes from Simon CSS:
     - It is a lot more useful than I thought to give something a class name and use that as the reference in
     the css file.
 
+Notes from Start up HTML and CSS:
+    - This time I started from the bottom with organization and structure in mind, after having seen a few other
+    examples of how it was done, and it was a lot easier to make css do what I needed it to since I knew what
+    element I was dealing with.
+    - The options available from the bootstrap framework are so abundant that I can't really learn them all right
+    away, but I can definitely search for something I think I might like and find something that helps me make
+    it work.
+    - The percentage isn't always the percentage of the screen, sometimes it's the percentage of the width of the
+    element or of something else.
+    - You can make a textarea read-only by typing readonly behind the tag.
+    
+
 

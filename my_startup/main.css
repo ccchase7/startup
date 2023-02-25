@@ -21,6 +21,7 @@ main {
 
 .sidebar {
     flex: 3;
+    text-align: center;
     background-color: #5480e6;
 }
 
@@ -33,6 +34,7 @@ main {
 
 .extra {
     flex: 2;
+    text-align: center;
     background-color: orange;
 }
 
@@ -65,12 +67,8 @@ main {
     flex: 2;
 }
 
-b {
-    transform: translate(-213%, -50%);
-}
-
-.button-group {
-    transform: translate(-13.4%, -50%);
+#input-area > #button-area > .button-group {
+    transform: translate(-13.4%, 12%);
 }
 
 #answer-area {
@@ -90,12 +88,17 @@ b {
     width: 252%;
 }
 
+#answer-buttons {
+    transform: translate(-16.1%, 13%);
+}
+
 footer {
     flex: 1;
+    text-align: center;
 }
 
 .bookend {
-    background-color: #747881;
+    background-color: #8e9199;
 }
 
 @media (max-height: 600px) {
@@ -105,5 +108,25 @@ footer {
 
     footer {
         display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .sidebar {
+        display: none;
+    }
+
+    .extra {
+        display: none;
+    }
+
+    #answer-area {
+        margin: 0 auto;
+    }
+
+    .form-group {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
     }
 }
