@@ -119,5 +119,25 @@ Notes from Start up HTML and CSS:
     element or of something else.
     - You can make a textarea read-only by typing readonly behind the tag.
     
+How to Javascript:
+    - Random Stuff:
+        - (expression) ? if_true : if_false;
+    - Loops:
+        - for (const val in list) { }   iterates over the property names.
+        - for (const val of list) { }   iterates over the items in the list. 
+    - Arrow Functions
+        - Make a closure (the function can access elements from its original scope.)
+        - () => 3; returns 3. () => { 3; } returns undefined.
+    - Objects
+        - entries: list of key-value pairs. keys: list of keys. values: array list of values.
+        - Any function that returns an object is considered a constructor, and can be invoked with "new"
+        - "Object literal syntax" is when you use the { } and specify what's in there (separated by comma,
+        not ;).
+    - Classes:
+        - constructor() {} is the keyword to indicate the constructor function. May have parameters.
+        - '#' indicates a private member
+    - DOM
+        - Stands for Document Object Model. It's a tree-like object that represents the structure of the html.
+
 
 
