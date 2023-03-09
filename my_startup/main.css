@@ -15,6 +15,24 @@ header {
     flex: 0 100px;
     text-align: center;
     justify-content: center;
+
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+}
+
+header #main-title {
+    flex: 16;
+    text-align: right;
+}
+
+header #login-register-buttons {
+    flex: 9;
+    text-align: right;
+}
+
+header #login-register-buttons div {
+    padding: .5em;
 }
 
 main {
@@ -106,7 +124,7 @@ footer {
     background-color: #1f8da7;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 380px) {
     header {
         display: none;
     }

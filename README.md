@@ -13,6 +13,17 @@ Features:
 
 Accesible at claytoncchase.com (18.188.213.187)
 
+DNS:
+    - What happens when you type in a domain name:
+        - Your browser sees if the IP address is already cached. If not,
+        - Your browser contacts a DNS server and asks if it's in there. There might be:
+            - A records, which map a domain name to an IP Address
+            - CNAME records, which map a domain name to another domain name
+        - Your browser establishes an HTTP connection with the server
+    - Since there is so much caching for optimization, you can set a "Time To Live" (like an expiration date)
+    - You can find the associated IP address with the "dig" command. You can find the route with "tracerout"
+
+
 HTML:
     Separate it into sections even though you don't necessarily have to, since it'll give the webpage more structure and help out with organization and non-visual functionality.
 
@@ -62,6 +73,7 @@ CSS:
                 - fr is a fractional unit (it splits up the parent into equal parts)
             - For when you want to display a group of child elements in a grid.
             - maybe use ^div^. define class for outer (container) and children.
+            - margin, border, padding, content
 
         Flex:
             -* You should specify how much room you want the whole thing (or just parts of it) to take using
@@ -122,20 +134,55 @@ Notes from Start up HTML and CSS:
 How to Javascript:
     - Random Stuff:
         - (expression) ? if_true : if_false;
+        - rest:
+            - in a function parameter list, put function(first, second, ...all_the_rest) and it'll combine all the rest of
+            the parameters given into an array called all_the_rest. (allows for variadic functions)
+        - spread:
+            - opposite of spread. expands an iterable to make it several parameters. like ** in python
+    - Scope:
+        - var ignores block scope, so probably use let and const.
+        - this:
+            - in funciton, refers to object it belongs to. up to globalThis, unless strict: undefined if in global scope.
+            - in object, refers to object.
+            - globalThis: the environment.
+        - Closure:
+            - "A function and its surrounding state"
+            - When you create a function, it remembers everything accessible in its creation scope.
+            - But arrow functions are different, they remember the creation context.
+            - But if you create the arrow function inside a function, then that function's context is its creation context.
     - Loops:
         - for (const val in list) { }   iterates over the property names.
         - for (const val of list) { }   iterates over the items in the list. 
     - Arrow Functions
         - Make a closure (the function can access elements from its original scope.)
         - () => 3; returns 3. () => { 3; } returns undefined.
-    - Objects
+    - Reduce:
+        - array.reduce((a, v) => a + v, initial)
+    - Objects:
         - entries: list of key-value pairs. keys: list of keys. values: array list of values.
         - Any function that returns an object is considered a constructor, and can be invoked with "new"
         - "Object literal syntax" is when you use the { } and specify what's in there (separated by comma,
         not ;).
+    - Regex:
+        - https://www.youtube.com/watch?v=rhzKDrUiJVk
+        - regex literal begins and ends with slash
+        - Flags are after the last slash. Flags like global (match all), i (case insensitive) m (multiline, $ end, ^ begins every line)
+        - e+ (one or more "e"s) e* (zero or more)
+        - a? (The symbol before the ? is optional. one or 0)
+        - . (any character, but not newline) \. for actual period
+        - \w (any word character, meaning letters) \s (any white space) \W (anything not \w) \S (anything not \s)
+        - \w{4,} (any set of word characters of length 4+) \w{4, 6} (length 4 to 6)
+        - [a-g] (character grouping)
+        - (r|l) (one or the other)
+        - ^ (beginning of line), $ (end of line)
+        - Parenthesis group things. You can reference those groupings after by using $1 (group number), or name them with ?<name>
     - Classes:
         - constructor() {} is the keyword to indicate the constructor function. May have parameters.
         - '#' indicates a private member
+    - Destructuring:
+        - [a] = [1, 2, 3] means a is 1 now.
+        - Used to rename things too. can use rest syntax.
+        - You could go into {}s to take things out of an object. also provide default values {a, b = 20} = obj. if nothing, undefined 
     - DOM
         - Stands for Document Object Model. It's a tree-like object that represents the structure of the html.
 
