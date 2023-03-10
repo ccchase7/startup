@@ -22,10 +22,20 @@ DNS:
         - Your browser establishes an HTTP connection with the server
     - Since there is so much caching for optimization, you can set a "Time To Live" (like an expiration date)
     - You can find the associated IP address with the "dig" command. You can find the route with "tracerout"
-
+    - CORS: Cross Origin Resource Sharing
+    - SOP: Same Origin Policy
 
 HTML:
-    Separate it into sections even though you don't necessarily have to, since it'll give the webpage more structure and help out with organization and non-visual functionality.
+    - index.html is the first one it goes to, usually
+    - Separate it into sections even though you don't necessarily have to, since it'll give the webpage more structure and help out with organization and non-visual functionality.
+    - meta should contain character set setup and viewport settings. Something like
+        "meta name="viewport" content="width=device-width, initial-scale=1.0" or
+        "meta charset="UTF-8"
+    - include (external), nav (navigation), text headings h<1-9>, table row, header, data.
+    svg scalable vector graphic
+    - List: [o u]l (ordered, unordered)
+    - Links: a anchors text to a hyperlink, tell href. form (collection of inputs)
+
 
 Changing the website once it's up:
     1. Make the changes you want.
@@ -57,9 +67,13 @@ Deploying Simon:
 
 CSS:
     General:
+        - Say link rel="stylesheet" href="main.css" to indicate where the page should go for the css
         Selectors:
             - Used to declare which elements you want the following css rules to apply to.
             - Class selector: a period before the class name. .class
+            - Descendant combinator: parent descendant {} ALL DESCENDANTS
+            - child: >. sibling: ~. adjacent sibling; +. attribute p[href], p[href = ""] (any p that has
+            an href attribute)
             - Also, element.class selects all items of that class that are children of that element.
             - #id   element[attributes ]
                 Pseudo Selectors:
@@ -132,6 +146,8 @@ Notes from Start up HTML and CSS:
     - You can make a textarea read-only by typing readonly behind the tag.
     
 How to Javascript:
+    - Putting it into your website:
+        - script src="other_page.js" tells it where to look for the javascript.
     - Random Stuff:
         - (expression) ? if_true : if_false;
         - rest:
@@ -139,6 +155,9 @@ How to Javascript:
             the parameters given into an array called all_the_rest. (allows for variadic functions)
         - spread:
             - opposite of spread. expands an iterable to make it several parameters. like ** in python
+        - JSON:
+            - Strings: always double quotes. Arrays: square braces and commas. Objects: {}
+            - to and from JSON: json.stringify(object), JSON.parse(json)
     - Scope:
         - var ignores block scope, so probably use let and const.
         - this:
@@ -150,12 +169,49 @@ How to Javascript:
             - When you create a function, it remembers everything accessible in its creation scope.
             - But arrow functions are different, they remember the creation context.
             - But if you create the arrow function inside a function, then that function's context is its creation context.
+    - Module:
+        - Node.js (server-side javascript execution) introduced it so you could import things from other
+        providers.
+        - Node.js: CommonJS. Normal: ES Modules
+        - scope is file-based, so if you want it visible outside of that then you have to "export" it
+        - You can import stuff with the keyword "import"
+
     - Loops:
         - for (const val in list) { }   iterates over the property names.
         - for (const val of list) { }   iterates over the items in the list. 
     - Arrow Functions
         - Make a closure (the function can access elements from its original scope.)
         - () => 3; returns 3. () => { 3; } returns undefined.
+    - Asynchronous:
+        - Promise:
+            - new Promise(***) you pass it a function that takes 2 variables: resolve and reject.
+                - (resolve, reject) => {process,  resolve(XXX) or reject(YYY)}
+            - .then(***) you pass it the function you want it to execute on success.
+                - (XXX) => {what you want it to do after promise resolves}
+            - .catch(***) you pass it the function you want it to execute on reject.
+                - (YYY) => {what you want it to do when promise rejects}
+            - .finally(***) you pass it the function it should always execute, on success and reject.
+                - (ZZZ) => {what you want it to execute every time, after the other stuff is done}
+            - Sometimes your promise will return another promise on a then or a catch, so you should
+            specify what happens on then or catch with the returned promise.
+        - Callback:
+            - setTimeout(***, miliseconds); you pass it a function and the amount of time you want
+            it to wait
+                - () => what you want it to do after it's done waiting
+            - Event Listener:
+                - item.addEventListener('event', (***)); you pass it the "event" it's waiting for (like
+                "click" or something) and the function you want it to execute when that event happens to
+                the item.
+        - async / await:
+            - declare a function and use the keyword "async", which means you can use the "await" keyword
+            in there
+            - use await for things that might take a bit. It will return on success, or maybe throw an error
+            if it fails. So use error handling.
+            - "THE AWAIT EXPRESSION WILL BLOCK UNTIL THE PROMISE MOVES TO FULFILLED OR THROWS AN EXCEPTION"
+            - await expects a promise, and will execute the promise it is given. so if a function "a" returns
+            a promise, then when you call await a(), the call to a() returns a promise, the "await" sees the
+            promise and initiates it and blocks until it is resolved.
+
     - Reduce:
         - array.reduce((a, v) => a + v, initial)
     - Objects:
@@ -179,6 +235,8 @@ How to Javascript:
     - Classes:
         - constructor() {} is the keyword to indicate the constructor function. May have parameters.
         - '#' indicates a private member
+        - Class class {}
+        - inheritance: "extends __"
     - Destructuring:
         - [a] = [1, 2, 3] means a is 1 now.
         - Used to rename things too. can use rest syntax.
