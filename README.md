@@ -244,5 +244,26 @@ How to Javascript:
     - DOM
         - Stands for Document Object Model. It's a tree-like object that represents the structure of the html.
 
+    - Notes From Javascript Simon:
+        - You just have to include something like "< script src="name.js"></script>" at the bottom of the html (but still within the body section)
+        - Encapsulate big ideas in classes.
+            - You can get sounds / other media ready by reading it in in the constructor
+        - You can pass in the element that triggered the javascript function by using the "this" keyword. From there, you can process
+        it in a general way without needing to use logic to figure out which one got pressed.
+        - localStorage is like a datacache that's managed by the user's browser, you can store things there that'll be there when you ask for them
+        (localStorage.setItem("itemName", "itemValue") or localStorage.getItem("itemName")). Everything has to be stored as a string, so if you need
+        to store an object then use JSON.stringify(object). Un-stringify using JSON.parse(json_object).
+        - If you want to run something as soon as the page shows up, you can just call the function / write the code at the bottom of the script file (like in
+        scores.js)
+        - You can also mess with the css by accessing the "style" attribute of an element. Ex. "this.el.style.backgroundColor = background;" (play.js:18)
+        - When updating the scores (play.js:141), they used "splice" to insert a score into the middle of the list of scores.
+        - To link an instance of the class with the game on the website, instantiate a "game" object, and in the constructer it sets everything up, and in the
+        html it specifies the name of that instance as the object that it is calling the callback functions on.
+        - To go through the list of objects of a certain class (or all accessed by the same selector), you can use something like 
+        "document.querySelectorAll('.game-button').forEach((el, i) => {} );"
+        
+
+
+
 
 
