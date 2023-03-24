@@ -337,7 +337,7 @@ Web Services:
         - REST: Representational State Transfer (acts on a resource.)
         - GraphQL: just exposes one endpoint and sends a query, and the server can process a lot at once
         instead of making the client send a ton of requests. Database stuff.
-    
+
     - Express:
         - It's a Node package that helps you make a production-ready server. "creating and using http
         routing and middleware functions"
@@ -360,7 +360,6 @@ Web Services:
                     - next: the next routing function (if necessary to generate response)
                         - the order that these routes are added is enforced. if there are two that
                         match, it'll start with the first one then the second one is passed in as "next
-
     Mediator/Middleware:
         - The mediator (express) gets a request and passes it around to various middleware functions.
         - There are tons of middleware functions, and you can make your own. routing functions are middleware
@@ -373,17 +372,7 @@ Web Services:
                     res.status(500).send({ type: err.name, message: err.message });
                 });
         - cookie-parser is a package that makes it easy to use cookies.
-
-
-
-
-    
-
-
-    
-
         
-
 
 
 
