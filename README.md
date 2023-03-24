@@ -12,7 +12,7 @@ Features:
 -	Potential guess-the-word games
 
 Accesible at claytoncchase.com (18.188.213.187)
-
+<details markdown="1"><summary>My Notes</summary>
 DNS:
     - What happens when you type in a domain name:
         - Your browser sees if the IP address is already cached. If not,
@@ -372,6 +372,12 @@ Web Services:
                     res.status(500).send({ type: err.name, message: err.message });
                 });
         - cookie-parser is a package that makes it easy to use cookies.
+</details>
+Notes from Simon-service
+    - Pretty much, you're constantly running an Express app service that just waits for someone to send an http request, and when they do, it serves up the files specified by the api defined in index.js.
+    - When a player finishes their game, their front-end calls saveScore(), which sends a request to that app to update the score, and the app gets the request and saves it in the service's memory.
+    - The deployment script specifies that it should listen on port 3000 (as does the default), so when I use
+    that to deploy my startup service, I should be sure to go in and 
         
 
 
