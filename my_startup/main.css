@@ -48,6 +48,12 @@ main {
     background-color: #557178;
 }
 
+.container {
+    display: grid;
+    grid-auto-rows: 50px;
+    grid-gap: 1em;
+  }
+
 .main-content {
     flex: 20;
     display: flex;

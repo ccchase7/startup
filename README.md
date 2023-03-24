@@ -261,7 +261,129 @@ How to Javascript:
         html it specifies the name of that instance as the object that it is calling the callback functions on.
         - To go through the list of objects of a certain class (or all accessed by the same selector), you can use something like 
         "document.querySelectorAll('.game-button').forEach((el, i) => {} );"
+
+    - Node.js:
+        - If you want to use preexisting packages, you should use a Node Package Manager (npm):
+            - make a new directory for your project
+            - go to that directory
+            - "npm init -y"
+            - creates a "package.json" file that contains 1. metadata, 2. commands, 3. packages that your project
+            depends on
+            - package-lock.json keeps track of the package version you got so when you want to install it again,
+            you get the same package version.
+            - "npm install name-of-package"
+            - "npm uninstall name-of-package"
+            - IMPORTANT: it'll create a node-modules directory, which is probably going to get super big. You
+            don't want to be moving that around (since you can just regenerate it with package.json), so you
+            should keep it in your .gitignore file.
+            - When you clone it to a new location, run "npm install" and it'll get everything ready for you.
+        - Using a package:
+            - instead of "import A as B", say "const B = require("A");" (where A is the package name and B is
+            how you want to refer to it)
+        - Summary:
+            - Create your project directory
+            - Initialize it for use with NPM by running npm init -y
+            - Make sure .gitignore file contains node-modules
+            - Install any desired packages with npm install <package name here>
+            - Add require('<package name here>') to your JavaScript code
+            - Run your code with node main.js
+
+Web Services:
+    - url:
+        - url: uniform resource locator. http = protocol = scheme. then domain name.
+            - instead of l, it could be n (for name) or i (identifier)
+        - "< scheme>://< domain name>:< port>/< path>?< parameters>#< anchor>"
+    - port:
+        - Allows for multiple protocols or multiple types of services.
+        - Famous ports: 20:ftp, 22:ssh, 25:SMTP (email), 53:dns lookup, 80:http, 443:https;
+        - (caddy is listening on 80 and 443) (80 auto-redirects to 443)
+    - http:
+        - Request:
+            < verb> < url path, parameters, anchor> < version>
+            [< header key: value>]*
+            [
+
+                < body>
+            ]
+        - you can specify the type of resource with "Accept:" (like "text/html")(image/png)
+        (text/javascript)(application/json) (has to be MIME type)
+        - Response:
+            < version> < status code> < status string>
+            [< header key: value>]*
+            [
+
+            < body>
+            ]
+        - Verbs:
+            - GET: get a resource
+            - POST: create new resource (returns unique id)
+            - PUT: update resource (requires unique id)
+            - DELETE: delete
+            - OPTIONS: get metadata, not resource.
+        - Response Codes:
+            - 1: info. 2: success. 3: redirect. 4: client error. 5: server error
+        - Cookies:
+            -server tells client what data to store with "Set-Cookie:" header, then client adds that on
+            to subsequent requests.
+            - Lets server remember things about client.
+        - CORS and SOP
+            - CORS: Cross Origin Resource Sharing (gets around SOP). SOP is default, but pretty much it
+            asks "where else am I allowed to get content from" before it shows that content.
+            - SOP: Same Origin Policy. javascript can't request something from a domain that the user is
+            not viewing.
+            - you have to be on the "access-control-allow-origin:" list if you want to use their stuff.
+    - Designing an API:
+        - RPC: Remote Procedure Calls (simple function calls) (couples API and implementation, :( )
+        - REST: Representational State Transfer (acts on a resource.)
+        - GraphQL: just exposes one endpoint and sends a query, and the server can process a lot at once
+        instead of making the client send a ton of requests. Database stuff.
+    
+    - Express:
+        - It's a Node package that helps you make a production-ready server. "creating and using http
+        routing and middleware functions"
+        1. npm install express (in the directory)
+        2. const express = require('express');
+        3. const app = express();
+        4. app.listen(PORT);
+
+        - Http routing (you get a request, you send it somewhere.)
+        5. Add routes (endpoints)
+            "app.get('path/:parameter', (***))"
+            "app.get('path/:storeName', (***))"
+            (you can use regular expressions /REGEX/ (you have to escape /)) ex.:
+            app.delete(/\/store\/(.+)/, (req, res) => res.send({ delete: req.params[0] }));
+                Parameters are indicated with ":"
+                where (***) is a callback function that takes parameters req, res, next, where:
+                    - req: the http request object
+                        - you can get parameters from the path using req.params. Ex. req.params.storeName
+                    - res: response object (res.send({}))
+                    - next: the next routing function (if necessary to generate response)
+                        - the order that these routes are added is enforced. if there are two that
+                        match, it'll start with the first one then the second one is passed in as "next
+
+    Mediator/Middleware:
+        - The mediator (express) gets a request and passes it around to various middleware functions.
+        - There are tons of middleware functions, and you can make your own. routing functions are middleware
+        functions.
+        - Except for routing, middleware functions are always called whenever the previous middleware function
+        in the chain calls next().
+        - Respond with a static file: "app.use(express.static('public'));"
+        - Error handling function:
+                app.use(function (err, req, res, next) {
+                    res.status(500).send({ type: err.name, message: err.message });
+                });
+        - cookie-parser is a package that makes it easy to use cookies.
+
+
+
+
+    
+
+
+    
+
         
+
 
 
 
