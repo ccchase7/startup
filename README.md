@@ -12,7 +12,7 @@ Features:
 -	Potential guess-the-word games
 
 Accesible at claytoncchase.com (18.188.213.187)
-<details markdown="1">##<summary>My Notes</summary>
+<details markdown="1"><summary>My Notes</summary>
 DNS:
     - What happens when you type in a domain name:
         - Your browser sees if the IP address is already cached. If not,
@@ -323,7 +323,7 @@ Web Services:
                 });
         - cookie-parser is a package that makes it easy to use cookies.
 </details>
-<details markdown="1">## <summary>Notes From Simon</summary>
+<details markdown="1"><summary>Notes From Simon</summary>
 Simon:
     - Use < nav> to help the user navigate from one page to another.
     - The links should relate to other html pages. You should probably have a < nav> in
