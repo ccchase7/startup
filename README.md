@@ -12,7 +12,7 @@ Features:
 -	Potential guess-the-word games
 
 Accesible at claytoncchase.com (18.188.213.187)
-<details markdown="1"><summary>My Notes</summary>
+<details markdown="1"><summary>## My Notes</summary>
 DNS:
     - What happens when you type in a domain name:
         - Your browser sees if the IP address is already cached. If not,
@@ -43,27 +43,6 @@ Changing the website once it's up:
     3. pull them to the amazon console
     4. deploy them using the deployment script
 <hr />
-
-Simon:
-    - Use < nav> to help the user navigate from one page to another.
-    - The links should relate to other html pages. You should probably have a < nav> in
-    all of your pages that helps the user get back to the home or at least get to
-    the next place they will need to go.
-    - < nav> is for internal "links", while < a href=""> is for external links.
-    - Name the label and say it is "for" the id of the thing that it is for.
-    - < b r /> and < h r /> are to help organize and separate paragraphs and sections of your page
-    - At the top of the page, you can include < meta> stuff that defines some of the general
-    characteristics of your page
-    - Also, for some reason if you put an "_" in the name of your tab icon, it won't recognize it
-    and you'll be severely disappointed until you figure it out.
-
-Deploying Simon:
-    - Make sure everything you want to deploy has been committed and pushed up to github
-    - Pull or clone it down on your amazon account
-    - make sure the permissions on the deploy script are correct. If you can't execute it
-    you might have to give execute permissions using chmod a+x "file"
-    - Run the deployment script. That will make it so when you go to the simon part of your
-    website, caddy will send the files associated with your simon app
 
 CSS:
     General:
@@ -122,17 +101,6 @@ User Experience:
         -Short circuit: If something goes wrong or takes too long, the user should still be able to do a lot.
     - WALLS: something that hinders the User Experience.  Complexity, payment, failure, security (too high or
     too low), or legal.
-
-Notes from Simon CSS:
-    - Instead of trying to make the html format your buttons, it's a lot easier to do it in the css file
-    - min-width is the smallest you ever want it to go even when the window shrinks
-    - position: absolute; will make it so the object doesn't take up any room in the layout, so it's nice
-    when you want something to just stay at one place the whole time and not worry about making everything
-    else fit around it.
-    - a lot of the time, the bootstrap keyword will be in the class name, and you can put more than one in
-    there and they'll compound on each other.
-    - It is a lot more useful than I thought to give something a class name and use that as the reference in
-    the css file.
 
 Notes from Start up HTML and CSS:
     - This time I started from the bottom with organization and structure in mind, after having seen a few other
@@ -243,24 +211,6 @@ How to Javascript:
         - You could go into {}s to take things out of an object. also provide default values {a, b = 20} = obj. if nothing, undefined 
     - DOM
         - Stands for Document Object Model. It's a tree-like object that represents the structure of the html.
-
-    - Notes From Javascript Simon:
-        - You just have to include something like "< script src="name.js"></script>" at the bottom of the html (but still within the body section)
-        - Encapsulate big ideas in classes.
-            - You can get sounds / other media ready by reading it in in the constructor
-        - You can pass in the element that triggered the javascript function by using the "this" keyword. From there, you can process
-        it in a general way without needing to use logic to figure out which one got pressed.
-        - localStorage is like a datacache that's managed by the user's browser, you can store things there that'll be there when you ask for them
-        (localStorage.setItem("itemName", "itemValue") or localStorage.getItem("itemName")). Everything has to be stored as a string, so if you need
-        to store an object then use JSON.stringify(object). Un-stringify using JSON.parse(json_object).
-        - If you want to run something as soon as the page shows up, you can just call the function / write the code at the bottom of the script file (like in
-        scores.js)
-        - You can also mess with the css by accessing the "style" attribute of an element. Ex. "this.el.style.backgroundColor = background;" (play.js:18)
-        - When updating the scores (play.js:141), they used "splice" to insert a score into the middle of the list of scores.
-        - To link an instance of the class with the game on the website, instantiate a "game" object, and in the constructer it sets everything up, and in the
-        html it specifies the name of that instance as the object that it is calling the callback functions on.
-        - To go through the list of objects of a certain class (or all accessed by the same selector), you can use something like 
-        "document.querySelectorAll('.game-button').forEach((el, i) => {} );"
 
     - Node.js:
         - If you want to use preexisting packages, you should use a Node Package Manager (npm):
@@ -373,13 +323,78 @@ Web Services:
                 });
         - cookie-parser is a package that makes it easy to use cookies.
 </details>
-Notes from Simon-service
-    - Pretty much, you're constantly running an Express app service that just waits for someone to send an http request, and when they do, it serves up the files specified by the api defined in index.js.
-    - When a player finishes their game, their front-end calls saveScore(), which sends a request to that app to update the score, and the app gets the request and saves it in the service's memory.
-    - The deployment script specifies that it should listen on port 3000 (as does the default), so when I use
-    that to deploy my startup service, I should be sure to go in and 
-        
+<details markdown="1"><summary>## Notes From Simon</summary>
+Simon:
+    - Use < nav> to help the user navigate from one page to another.
+    - The links should relate to other html pages. You should probably have a < nav> in
+    all of your pages that helps the user get back to the home or at least get to
+    the next place they will need to go.
+    - < nav> is for internal "links", while < a href=""> is for external links.
+    - Name the label and say it is "for" the id of the thing that it is for.
+    - < b r /> and < h r /> are to help organize and separate paragraphs and sections of your page
+    - At the top of the page, you can include < meta> stuff that defines some of the general
+    characteristics of your page
+    - Also, for some reason if you put an "_" in the name of your tab icon, it won't recognize it
+    and you'll be severely disappointed until you figure it out.
 
+Deploying Simon:
+    - Make sure everything you want to deploy has been committed and pushed up to github
+    - Pull or clone it down on your amazon account
+    - make sure the permissions on the deploy script are correct. If you can't execute it
+    you might have to give execute permissions using chmod a+x "file"
+    - Run the deployment script. That will make it so when you go to the simon part of your
+    website, caddy will send the files associated with your simon app
+
+Notes from Simon CSS:
+    - Instead of trying to make the html format your buttons, it's a lot easier to do it in the css file
+    - min-width is the smallest you ever want it to go even when the window shrinks
+    - position: absolute; will make it so the object doesn't take up any room in the layout, so it's nice
+    when you want something to just stay at one place the whole time and not worry about making everything
+    else fit around it.
+    - a lot of the time, the bootstrap keyword will be in the class name, and you can put more than one in
+    there and they'll compound on each other.
+    - It is a lot more useful than I thought to give something a class name and use that as the reference in
+    the css file.
+
+Notes From Javascript Simon:
+    - You just have to include something like "< script src="name.js"></script>" at the bottom of the html
+    (but still within the body section)
+    - Encapsulate big ideas in classes.
+        - You can get sounds / other media ready by reading it in in the constructor
+    - You can pass in the element that triggered the javascript function by using the "this" keyword. From
+    there, you can process it in a general way without needing to use logic to figure out which one got pressed.
+    - localStorage is like a datacache that's managed by the user's browser, you can store things there that'll
+    be there when you ask for them (localStorage.setItem("itemName", "itemValue") or localStorage.getItem("itemName")).
+    Everything has to be stored as a string, so if you need to store an object then use JSON.stringify(object). Un-stringify
+        using JSON.parse(json_object).
+    - If you want to run something as soon as the page shows up, you can just call the function / write the code at the bottom
+    of the script file (like in scores.js)
+    - You can also mess with the css by accessing the "style" attribute of an element. Ex. "this.el.style.backgroundColor = background;" (play.js:18)
+    - When updating the scores (play.js:141), they used "splice" to insert a score into the middle of the list of scores.
+    - To link an instance of the class with the game on the website, instantiate a "game" object, and in the constructer it sets everything up, and in the
+    html it specifies the name of that instance as the object that it is calling the callback functions on.
+    - To go through the list of objects of a certain class (or all accessed by the same selector), you can use something like 
+    "document.querySelectorAll('.game-button').forEach((el, i) => {} );"
+
+Notes from Simon-service
+    - Pretty much, you're constantly running an Express app service that just waits for someone to send an http request, and when they do, it serves up the files
+    specified by the api defined in index.js.
+    - When it's starting off, the browser just says it wants to connect (via an http request) and that default message that gets
+    sent indicates to the app service that it needs to give the files for the login page.
+    - When a player finishes their game, their front-end calls saveScore(), which sends a request to that app to update the score, and the app gets the request
+    and saves it in the service's memory.
+    - The deployment script specifies that it should listen on port 3000 (as does the default), so when I use
+    that to deploy my startup service, I should be sure to go in and change it to whatever port I want it to listen
+    on for my startup app
+    - It defines the object it's going to send like "const newScore = { name: userName, score: score, date: date };",
+    which indicates that doesn't need quotes or anything, and the score on the left of the ":" is a name but the score
+    on the right is a variable (you're defining an object)
+    - Everything is asynchronous just in case it takes forever for the api call to return.
+    - "fetch" is the keyword for "it's sending to the express app"
+
+
+
+</details>
 
 
 
