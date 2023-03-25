@@ -52,7 +52,27 @@ main {
     display: grid;
     grid-auto-rows: 50px;
     grid-gap: 1em;
-  }
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+}
+
+.aaa {
+    display: flex;
+    flex-direction: row;
+}
+
+.delete-button {
+    flex: 1;
+    background-color: rgb(250, 4, 4);
+}
+
+.other-button {
+    flex: 1;
+    background-color: blue;
+}
 
 .main-content {
     flex: 20;
