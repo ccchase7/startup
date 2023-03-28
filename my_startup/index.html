@@ -35,41 +35,44 @@
     </header>
 
     <main>
-        <div class="sidebar">
-            <p>Saved Anagrams:</p>
-            <div class="container" id="saved-anagrams">
+        <div>
+            <div class="sidebar">
+                <p>Saved Anagrams:</p>
+                <div class="container" id="saved-anagrams">
+                    <div class="card">You have no saved Anagrams.</div>
+                </div>
             </div>
-        </div>
-
-        <div class="main-content">
-            <div id="main-title"><p id="main-title-text">Create Your Anagram Here</p></div>
-            <hr />
-            <div id="input-area">
-                <div id="input-string" ><textarea id="input-textbox" class="form-control">Input a String</textarea></div>
-                <div id="button-area">
-                    <div class="button-group">
-                        <button type="button" class="btn btn-outline-primary" onclick="anagramBuilder.getAnagram()">Generate</button>
-                        <button type="button" class="btn btn-outline-light" onclick="clearInputOutput()">Retry</button>
+    
+            <div class="main-content">
+                <div id="main-title"><p id="main-title-text">Create Your Anagram Here</p></div>
+                <hr />
+                <div id="input-area">
+                    <div id="input-string" ><textarea id="input-textbox" class="form-control" onkeypress="anagramBuilder.detectEnterOrSpace(event)">Input a String</textarea></div>
+                    <div id="button-area">
+                        <div class="button-group">
+                            <button type="button" class="btn btn-outline-primary" onclick="anagramBuilder.getAnagram()">Generate</button>
+                            <button type="button" class="btn btn-outline-light" onclick="clearInputOutput()">Retry</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="answer-area">
+                    <div class="form-group yellow-border">
+                        <label for="answer-text">Answer:</label>
+                        <textarea readonly class="form-control" id="answer-text" rows="1"></textarea>
+                    </div>
+                    <div id="answer-button-area">
+                        <div class="button-group" id="answer-buttons">
+                            <button type="button" class="btn btn-outline-success" id="save-button" onclick="saveAnagram()">Save</button>
+                            <button type="button" class="btn btn-outline-info" id="retry-button">Share</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr />
-            <div id="answer-area">
-                <div class="form-group yellow-border">
-                    <label for="answer-text">Answer:</label>
-                    <textarea readonly class="form-control" id="answer-text" rows="1"></textarea>
-                </div>
-                <div id="answer-button-area">
-                    <div class="button-group" id="answer-buttons">
-                        <button type="button" class="btn btn-outline-success" id="save-button" onclick="saveAnagram()">Save</button>
-                        <button type="button" class="btn btn-outline-info" id="retry-button">Share</button>
-                    </div>
-                </div>
+    
+            <div class="extra">
+                <p>Shared With Me:</p>
             </div>
-        </div>
-
-        <div class="extra">
-            <p>Favorites:</p>
         </div>
     </main>
 
