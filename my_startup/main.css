@@ -66,6 +66,10 @@ main {
     grid-gap: 1em;
 }
 
+#shared-anagrams {
+    grid-auto-rows: 120px;
+}
+
 .card {
     display: flex;
     flex-direction: row;

@@ -176,7 +176,7 @@ async function login()
     }
 
     //unhide the page
-    initialSetup();
+    initialSetup(true);
 }
 
 async function register()
@@ -190,15 +190,33 @@ async function register()
     }
 
     //unhide the page
-    initialSetup();
+    initialSetup(true);
 }
 
-function initialSetup()
+function logout()
 {
-    document.getElementById("login-register-message").hidden = true;
-    document.getElementById("everything").removeAttribute("hidden");
-    document.getElementById("login-register-buttons").hidden = true;
-    document.getElementById("main-title").style.textAlign = "center";
+    document.getElementById("login-register-message").textContent = "Please login / register to continue.";
+    initialSetup(false);
+}
+
+function initialSetup(on_off)
+{
+    document.getElementById("login-register-message").hidden = on_off;
+    document.getElementById("login-register-buttons").hidden = on_off;
+    document.getElementById("logout").hidden = !on_off;
+    document.getElementById("everything").hidden = !on_off;
+
+    if(on_off)
+    {
+        document.getElementById("main-title").style.textAlign = "center";
+    }
+    else
+    {
+        document.getElementById("username-textbox").value = "";
+        document.getElementById("password-textbox").value = "";
+        document.getElementById("main-title").style.textAlign = "right";
+    }
+    
 }
 
 function processUsernamePassword()
