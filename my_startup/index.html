@@ -33,9 +33,9 @@
             <div>
                 <form>
                     <label for="username-textbox">Username:</label>
-                    <textarea class="login-register" id="username-textbox">username</textarea>
+                    <textarea class="login-register" id="username-textbox"></textarea>
                     <label for="username-textbox">Password:</label>
-                    <textarea class="login-register" id="password-textbox">password</textarea>
+                    <textarea class="login-register" id="password-textbox"></textarea>
                 </form>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <div id="answer-button-area">
                         <div class="button-group" id="answer-buttons">
                             <button type="button" class="btn btn-outline-success" id="save-button" onclick="saveAnagram()">Save</button>
-                            <button type="button" class="btn btn-outline-info" id="retry-button">Share</button>
+                            <button type="button" class="btn btn-outline-info" id="retry-button" onclick="shareAnagram()">Share</button>
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,8 @@
     
             <div class="extra">
                 <p>Shared With Me:</p>
+                <div class="container" id="shared-anagrams">
+                </div>
             </div>
         </main>
     </div>
