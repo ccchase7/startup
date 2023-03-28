@@ -26,9 +26,21 @@ header #main-title {
     text-align: right;
 }
 
+#login-register-message {
+    text-align: center;
+}
+
 header #login-register-buttons {
     flex: 9;
     text-align: right;
+}
+
+header .login-register {
+    height: 30px;
+}
+
+header form label {
+    vertical-align:top;
 }
 
 header #login-register-buttons div {

@@ -131,6 +131,27 @@ async function makeNewSavedAnagram(txt)
 
 async function login()
 {
-    
+    document.getElementById("login-register-message").textContent = "Logging in...";
+    //Process Login here
+
+    //unhide the page
+    initialSetup();
+}
+
+async function register()
+{
+    document.getElementById("login-register-message").textContent = "Registering";
+    //Process Login here
+
+    //unhide the page
+    initialSetup();
+}
+
+function initialSetup()
+{
+    document.getElementById("login-register-message").hidden = true;
+    document.getElementById("everything").removeAttribute("hidden");
+    document.getElementById("login-register-buttons").hidden = true;
+    document.getElementById("main-title").style.textAlign = "center";
 }
 

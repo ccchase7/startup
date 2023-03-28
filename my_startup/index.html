@@ -27,15 +27,24 @@
         </div>
         <div id="login-register-buttons">
             <div>
-                <button type="button" id="login-btn" class="btn btn-primary">Login</button>
-                <button type="button" id="register-btn" class="btn btn-primary">Register</button>
+                <button type="button" id="login-btn" class="btn btn-primary" onclick="login()">Login</button>
+                <button type="button" id="register-btn" class="btn btn-primary" onclick="register()">Register</button>
+            </div>
+            <div>
+                <form>
+                    <label for="username-textbox">Username:</label>
+                    <textarea class="login-register" id="username-textbox">username</textarea>
+                    <label for="username-textbox">Password:</label>
+                    <textarea class="login-register" id="password-textbox">password</textarea>
+                </form>
             </div>
         </div>
         
     </header>
 
-    <main>
-        <div>
+    <div id="login-register-message"><p>Please Login or Register to Conitnue</p></div>
+    <div id="everything" hidden>
+        <main>
             <div class="sidebar">
                 <p>Saved Anagrams:</p>
                 <div class="container" id="saved-anagrams">
@@ -73,8 +82,8 @@
             <div class="extra">
                 <p>Shared With Me:</p>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <footer class="bookend">
         <p>Thank you for visiting startup.claytoncchase.com. Tell your friends how much fun you had!</p>
