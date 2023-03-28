@@ -100,6 +100,10 @@ async function saveAnagram()
     {
         return;
     }
+    if (anagramBuilder.outputTextBox.textContent === "")
+    {
+        return;
+    }
 
     if (anagramBuilder.savedAnagrams.length === 0)
     {
@@ -124,6 +128,11 @@ async function saveAnagram()
 async function shareAnagram()
 {
     let shareBar = document.getElementById("shared-anagrams");
+
+    if (anagramBuilder.outputTextBox.textContent === "")
+    {
+        return;
+    }
 
     if (anagramBuilder.sharedAnagrams.length >= ANAGRAM_LIMIT)
     {
@@ -163,6 +172,13 @@ async function makeNewSharedAnagram(txt)
     let user = localStorage.getItem("userName");
     newAnagram.textContent = user + ": " +  "Word: " + anagramBuilder.inputTextBox.textContent + " Anagram: " + txt;
     return newAnagram;
+}
+
+async function loginFromEnter(event)
+{
+    if ((event.keyCode === 13)) {
+        await login();
+    }
 }
 
 async function login()
