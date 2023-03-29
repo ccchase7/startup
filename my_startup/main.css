@@ -54,6 +54,13 @@ main {
     flex-direction: row;
 }
 
+#everything {
+    flex: 4;
+    
+    display: flex;
+    flex-direction: row;
+}
+
 .sidebar {
     flex: 3;
     text-align: center;
