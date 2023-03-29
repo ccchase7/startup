@@ -2,7 +2,7 @@
 Startup project for CS 260
 
 I clone trashy China cats.
-Not really. But the cool thing is, if you mix up all the letters in that sentence, you can spell out my full name.  Imagine a website where you could just type in your name, or maybe someone else’s name, or any word or sentence really, and find out what else those letters would spell! That’s what my startup is all about: anagrams. I’m not saying they’ll be very good, but we’ll find you one if there is one. On the website, you’ll enter some letters and it’ll give you an anagram. You’ll be able to log in, save your favorite ones for later, send the good ones to your buddies (or your grandma), and maybe even more!
+Not really. But the cool thing is, if you mix up all the letters in that sentence, you can spell out my full name.  Imagine a website where you could just type in a word and find out what else those letters would spell! That’s what my startup is all about: anagrams. I’m not saying they’ll be very good, but we’ll find you one if there is one. On the website, you’ll enter some letters and it’ll give you an anagram. You’ll be able to log in, save your favorite ones for later, send the good ones to your buddies (or your grandma), and maybe even more!
 Features:
 -	Secure login over HTTPS
 -	It’ll give you an anagram
@@ -101,17 +101,6 @@ User Experience:
         -Short circuit: If something goes wrong or takes too long, the user should still be able to do a lot.
     - WALLS: something that hinders the User Experience.  Complexity, payment, failure, security (too high or
     too low), or legal.
-
-Notes from Start up HTML and CSS:
-    - This time I started from the bottom with organization and structure in mind, after having seen a few other
-    examples of how it was done, and it was a lot easier to make css do what I needed it to since I knew what
-    element I was dealing with.
-    - The options available from the bootstrap framework are so abundant that I can't really learn them all right
-    away, but I can definitely search for something I think I might like and find something that helps me make
-    it work.
-    - The percentage isn't always the percentage of the screen, sometimes it's the percentage of the width of the
-    element or of something else.
-    - You can make a textarea read-only by typing readonly behind the tag.
     
 How to Javascript:
     - Putting it into your website:
@@ -394,6 +383,29 @@ Notes from Simon-service
 
 
 
+</details>
+<details markdown="1"><summary>Notes From Startup</summary>
+Notes from Start up HTML and CSS:
+    - This time I started from the bottom with organization and structure in mind, after having seen a few other
+    examples of how it was done, and it was a lot easier to make css do what I needed it to since I knew what
+    element I was dealing with.
+    - The options available from the bootstrap framework are so abundant that I can't really learn them all right
+    away, but I can definitely search for something I think I might like and find something that helps me make
+    it work.
+    - The percentage isn't always the percentage of the screen, sometimes it's the percentage of the width of the
+    element or of something else.
+    - You can make a textarea read-only by typing readonly behind the tag.
+
+Notes from Startup Javascript:
+    - When you're adding funcitonality, sometimes you have to change the .js, .css, and the .html file all just to
+    change one thing, since they all work together.
+    - you can set a function to happen when you hover over something and another function to happen when you un-hover.
+    - you can set a callback function onkeypress and pass in the keypress event to change what it does when certain keys
+    are pressed (for example executing the login function when they press enter) (event.keyCode)
+    - you can change pretty much any element or attribute using javascript. You really have to know what the DOM
+    structure is though, and keep track of what you have changed so you know what you have to update and work around
+    - If there is code not in a function definition, it will just run when the page comes up.
+    - Just hide stuff using "hidden"
 </details>
 
 

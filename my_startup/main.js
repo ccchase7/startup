@@ -185,9 +185,10 @@ async function login()
 {
     document.getElementById("login-register-message").textContent = "Logging in...";
     //Process Login here
-    if (!processUsernamePassword())
+    let resp =  await processUsernamePassword(validateLogin);
+    if (!resp[0])
     {
-        document.getElementById("login-register-message").textContent = "Invalid username / password. Please try again.";
+        document.getElementById("login-register-message").textContent = resp[1];
         return;
     }
 
@@ -199,9 +200,10 @@ async function register()
 {
     document.getElementById("login-register-message").textContent = "Registering";
     //Process Login here
-    if (!processUsernamePassword())
+    let resp = await processUsernamePassword(validateRegister);
+    if (!resp[0])
     {
-        document.getElementById("login-register-message").textContent = "Invalid username / password. Please try again.";
+        document.getElementById("login-register-message").textContent = resp[1];
         return;
     }
 
@@ -235,7 +237,7 @@ function initialSetup(on_off)
     
 }
 
-function processUsernamePassword()
+async function processUsernamePassword(validate)
 {
     const usernameBox = document.getElementById("username-textbox");
     const passwordBox = document.getElementById("password-textbox");
@@ -243,18 +245,57 @@ function processUsernamePassword()
     let username = usernameBox.value;
     let password = passwordBox.value;
 
+    let resp = await validate(username, password);
+
     if ((username === "") || (password === ""))
     {
-        return false;
+        return [false, "Username and Password must not be empty."];
     }
 
+    if (!resp[0])
+    {
+        return resp;
+    }
+
+
+
+    localStorage.setItem(username, password);
     localStorage.setItem("userName", username);
-    console.log(localStorage.getItem("userName"));
+    console.log(localStorage.getItem(username));
 
-    localStorage.setItem("password", password);
-    console.log(localStorage.getItem("password"));
+    return [true];
 
-    return true;
+}
 
+async function validateLogin(username, password)
+{
+    if (username in localStorage)
+    {
+        if (localStorage.getItem(username) === password)
+        {
+            return [true];
+        }
+        else
+        {
+            return [false, "Incorrect Username / Password"];
+        }
+    }
+    else
+    {
+        
+        return [false, "Incorrect Username / Password"];
+    }
+}
+
+async function validateRegister(username, password)
+{
+    if (username in localStorage)
+    {
+        return [false, "Username already reserved. Please try a different username."];
+    }
+    else
+    {
+        return [true];
+    }
 }
 
