@@ -311,6 +311,27 @@ Web Services:
                     res.status(500).send({ type: err.name, message: err.message });
                 });
         - cookie-parser is a package that makes it easy to use cookies.
+
+Data Services:
+    - MongoDB is a NoSQL (it dowsn't rely on relational database paradigms) database that us useful for JSON
+    objects
+    - Queries look something like "db.category.find(attributes);"
+    1. npm install mongodb (in shell)
+    2. Create an instance of the MongoClient class
+        - const { MongoClient } = require('mongodb') # defines the MongoClient class. It needs several parameters.
+        - const userName = 'username';
+        - const password = 'password';
+        - const hostname = 'hostname';
+        * const uri = \`mongodb+srv://${userName}:${password}@${hostname}`;
+        - const client = new MongoClient(uri); #creates an instance of the MongoClient class.
+    3. From the client object, you can get a database object, and from there you can get a collection object.
+        - Collection object lets you insert and ask for documents in the database.
+        - To add an object, just call .insertOne(object); on the collection object. (inserting a javascript object)
+        - To retreive an object use ".find()" (it's asynchronous)
+            - const cursor = collection.find();
+            - const rentals = await cursor.toArray();
+
+    
 </details>
 <details markdown="1"><summary>Notes From Simon</summary>
 Simon:
@@ -381,7 +402,21 @@ Notes from Simon-service
     - Everything is asynchronous just in case it takes forever for the api call to return.
     - "fetch" is the keyword for "it's sending to the express app"
 
-
+Notes from Simon DB:
+    - If you just say collection.find(), you'll get everything in the collection. What you can do before is
+            - specify a "query" an object with requirements in it, like "const query = {score: {$gt: 0}};"
+            - specify an "options" object that contains things like how you want it ordered (sort) and how many
+            you want to get back (limit)
+    - You'll get back an object (call it cursor) and you can make it an array by calling cursor.toArray().
+    - Your API has no idea you're even using a database. Calls to the DB object just return an array of the 
+    objects that you asked for. That means that to the client, Simon-DB is no different from Simon-Service
+    (except for it might take a tiny bit longer)
+    -index.js knows how to make a DB object because it instantiated one with
+        "const DB = require('./database.js');"
+    Pretty much, in database.js you say "module.exports = {}" and fill it in with the functions that you'd
+    like to be accesible when someone uses the module. When they instantiate it, it'll run all the setup.
+    - Whenever they add a score, they ask for the high scores again to make sure that the scores page stays up
+    to date.
 
 </details>
 <details markdown="1"><summary>Notes From Startup</summary>
