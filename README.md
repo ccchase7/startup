@@ -329,7 +329,7 @@ Data Services:
         - To add an object, just call .insertOne(object); on the collection object. (inserting a javascript object)
         - To retreive an object use ".find()" (it's asynchronous)
             - const cursor = collection.find();
-            - const rentals = await cursor.toArray();
+            - const rentals = await cursor.toArray()
 
     
 </details>
@@ -417,6 +417,30 @@ Notes from Simon DB:
     like to be accesible when someone uses the module. When they instantiate it, it'll run all the setup.
     - Whenever they add a score, they ask for the high scores again to make sure that the scores page stays up
     to date.
+
+Notes from Simon Login:
+    - Cookies:
+        - Flags:
+            - sameSite: strict-: "Cookies will only be sent in a first-party context and not be sent along with requests
+            initiated by third party websites."
+            - secure: true-: It has to be sent over https, not over http.
+            - httponly: true-: Javascript may not access the cookie. Only the browser may access the cookie.
+            - Be sure to remove cookie when user logs out (line 56 of index.js)
+            - Also, on logout, you should return the user to the original screen (window.location.href = '/').
+        - Using Cookies:
+            - By using the cookie-parser, you don't have to do everything yourself. Just have a function like "setAuthCookie"
+            (line 109). That's where you'll set your sameSite, secure, and httponly flags.
+    - Using authenticated api calls:
+        - After you have a cookie established, it should be sent with all the requests. You don't want to have to
+        check it with all your api calls, so wrap it in another router, and whenever that router is used (api endpoints
+        that require authentication will all only go through the secure wrapper router), it checks the authentication
+        first and then goes to the "next" function. The api endpoints for register / login do not go through this secure
+        router, since the user will not yet have an auth cookie yet.
+        - Just send back an error code and error message if the user doesn't meet your authentication requirements.
+    - Since you're using httponly and doing all the authentication between the browser and the service, your .js implementation
+    does not even have any idea that the app is authenticated or not, it just calls to the api and either gets back an accept message
+    or handles an error message.
+
 
 </details>
 <details markdown="1"><summary>Notes From Startup</summary>
