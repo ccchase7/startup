@@ -441,6 +441,22 @@ Notes from Simon Login:
     does not even have any idea that the app is authenticated or not, it just calls to the api and either gets back an accept message
     or handles an error message.
 
+Notes from Simon WebSocket:
+    - PeerProxy wraps your server and makes it so when a connection wants to be a WebSocket connection, it is handled by the PeerProxy
+    WebSocketServer instead of the other listening server when you specify "noServer" mode. That way, when a request comes in that wants
+    to upgrade to WebSocket, the WebSocketServer handles the upgrade notification, not the http server.
+    - Again, the PeerProxy file makes only what it wants available with "module.exports = { PeerProxy };"
+    - Since it has the WebSocketServer in the middle to mediate what happens, all of the clients are connected to the wss and when a new
+    one connects, it is added to the list of connections.
+    - Within the function that handles new connections, the functions for handling a message and receiving an answer from the ping are
+    defined.
+    - To ensure that all the connections are still alive, it pings all the connecitons in its list every 10 seconds and if it does not get
+    an answer back, it the connection is marked as not alive and will be removed from the connections list.
+    - It also accounts for if the user closes the connection (which sends a notification) not just if it doesn't respond to the ping
+    - The client also has to set some stuff up so it can be a part of the WebSocket connection.
+    - on starting to play the game, it starts configureWebSocket where it makes a new websocket (which is then added to the connections
+    array on the server side after it gets upgraded) and defines what actions it should take when it gets a message from the websocket.
+    - It uses a broadcastEvent method to send a message to the webSocket (which is then received and distributed by the WebSocketServer)
 
 </details>
 <details markdown="1"><summary>Notes From Startup</summary>
