@@ -331,6 +331,30 @@ Data Services:
             - const cursor = collection.find();
             - const rentals = await cursor.toArray()
 
+Web Frameworks / React:
+    - React: Requires a transpiler (goes through and runs the code so it can construct the html), you build the html out of code and html.
+    - You can pass informatino to the react components via element properties.
+    - React can store a "state" (created by calling React.useState) that can be updated and rendered.
+        - "state" is the data you want to display when the component is rendered
+        - "render()" is the function, its output is the component.
+    - The react framework is like the "builder", you change it up in a lower-cost way and then when it's done it'll change the DOM to mirror it.
+    - props, state, and render.
+    Steps:
+        1. define some states and the function you want to change them: [state, functionForState];
+        2. Write the functions to change the states
+        3. Set everything up to know when to change the states and what to change them to
+
+    Tic-Tac-Toe:
+        - You can make a JSX fragment delimited by <></>
+            - return (<>stuff-inside-fragment</>)
+        - When you need to reuse something, just make it a component, then you can just use the component and not ever
+        have to copy all the code all over the place.
+        * Your component names must start with a capital letter
+        - props are properties that a component is passed in as parameters.
+        - Collaboration among components should take place in the parent of those components if possible.
+        
+
+
     
 </details>
 <details markdown="1"><summary>Notes From Simon</summary>
