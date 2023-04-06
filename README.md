@@ -352,6 +352,44 @@ Web Frameworks / React:
         * Your component names must start with a capital letter
         - props are properties that a component is passed in as parameters.
         - Collaboration among components should take place in the parent of those components if possible.
+        - React rendering a list: it'll look for the entry ID when it's re-rendering. If the ID is the same,
+        it'll be moved. If the key exists in the old and not in the new, it will be destroyed. not in old and
+        exist in new: create.
+        - Use a key to identify the list element. Keys don't need to be globally unique, just unique among 
+        siblings.
+        - You should (pretty much always) assign proper keys for dynamic lists
+
+    Hooks:
+        - things like useState or useEffect
+        - useEffect: you can specify what triggers useEffect by adding a dependency ([states, that, depends, on])
+            - [] is for only when first rendered.
+        - Only in function style components, only at top of scope (not inside loops, to enforce hook order)
+
+    React CLI:
+        - Use NPX (npm install + npm start + cleanup) to run the React CLI
+        - Important Steps:
+            1. npx create-react-app app-name
+                1. updated ./package-json to add all the relevant react packages
+                2. made ./public/index.html (entry point for browser)
+                3. made ./src/index.js (initialize react app)
+                4. made ./src/app.js (first react component)
+            2. cd app-name
+            3. npm start
+            4. Replace icons with your own icon
+            5. put your application name in manifest.json and package.json
+            6. update README
+            7. change index.html title and metadata
+            8. consider making .js files that will contain JSX as .jsx, since some transpilers require it.
+            9. Make the webApp how you want it (big step)
+            ...
+            10. npm run build (goes to a subdirectory called 'build')
+        - You might also want to remove the test data that it adds by default.
+            - Maybe you don't want them
+            - Maybe you want to replace them with something else
+
+
+
+
         
 
 
