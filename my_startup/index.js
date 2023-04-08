@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const app = express();
+const DB = require('./database.js');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -13,7 +14,7 @@ const authCookieName = 'token';
 app.use(express.json());
 
 // Serve up the front-end static content hosting
-app.use(express.static('public'));
+app.use(express.static('my_startup/public'));
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -50,7 +51,7 @@ apiRouter.post('/auth/login', async (req, res) => {
       return;
     }
   }
-  res.status(401).send({ msg: 'Unauthorized' });
+  res.status(401).send({ msg: 'Invalid Username / Password. Please Try Again.' });
 });
 
 // DeleteAuth token if stored in cookie

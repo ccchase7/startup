@@ -565,6 +565,9 @@ Notes from Startup Javascript:
     structure is though, and keep track of what you have changed so you know what you have to update and work around
     - If there is code not in a function definition, it will just run when the page comes up.
     - Just hide stuff using "hidden"
+
+Notes from Startup Service:
+    - 
 </details>
 
 
