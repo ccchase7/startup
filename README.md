@@ -520,6 +520,28 @@ Notes from Simon WebSocket:
     array on the server side after it gets upgraded) and defines what actions it should take when it gets a message from the websocket.
     - It uses a broadcastEvent method to send a message to the webSocket (which is then received and distributed by the WebSocketServer)
 
+Notes from Simon React:
+    - It's a little more complicated because instead of just having a server listening for requests and returning files, it's hosting an
+    application inside the React framework, so you have to have extra configuration files (like manifest.json that gives the overview of
+    the app) and you have to include a ton of React packages.
+    - The router you use for this one is different since it lets you use React, you get it using react-router-dom, which lets you set up
+    your endpoints (kind of) for how to get components back based on what happens. (you define the "to" path in the html, and you define
+    the "router definitions" to let it know what to do when it asks for that path (which, instead of going to another page it will just
+    display a different component.))
+        - You can handle some errors here by making a < Route path='*' element={< NotFound />} /> one, which is like the default for an
+        unknown component name
+    - You can also embed authentication (being logged in) checking in the jsx file, not as an "if authenticated" directly, but more as a
+    passive check requirement
+    - Changing over to react:
+        - "class" is now "className"
+        - You're going to turn your functions into inner functions of the react component.
+        - query selectors will now become state variables, since everything is controlled by the state now (which means you might have
+        to centralize the states in the parent)
+    - The Deployment Script: builds a production 'distribution package' of it, removes the old build from production, copies the package
+    over and turns on the service, then removes the local copy of the distribution package.
+
+
+
 </details>
 <details markdown="1"><summary>Notes From Startup</summary>
 Notes from Start up HTML and CSS:
