@@ -567,7 +567,7 @@ Notes from Startup Javascript:
     - Just hide stuff using "hidden"
 
 Notes from Startup Service:
-    - 
+    - You have to await cursor.next()
 </details>
 
 

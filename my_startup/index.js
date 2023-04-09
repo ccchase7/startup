@@ -113,18 +113,16 @@ secureApiRouter.use(async (req, res, next) => {
 secureApiRouter.post('/save', async (req, res) => {
   authToken = req.cookies[authCookieName];
   const curr_user = await DB.getUserByToken(authToken);
-  const currDate = new Date().toLocaleDateString();
 
   const savedAnagram = {
-    user: curr_user,
+    user: curr_user.email,
     anagram: req.body,
-    timestamp: currDate,
     limit: 10
   }
 
-  await DB.addSavedAnagram(curr_user);
+  await DB.addSavedAnagram(savedAnagram);
 
-  const allSaved = await DB.getSavedAnagrams();
+  const allSaved = await DB.getSavedAnagrams(curr_user.email);
   res.send(allSaved);
 });
 

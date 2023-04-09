@@ -124,8 +124,8 @@ async function saveAnagram()
         }
     }
 
-    let currAnagram = await makeNewSavedAnagram(anagramBuilder.outputTextBox.textContent);
-    
+    let currAnagram = await makeSavedAnagramObj(anagramBuilder.outputTextBox.textContent);
+    let saved = [];
 
     try {
         const response = await fetch('/api/save', {
@@ -135,7 +135,7 @@ async function saveAnagram()
         });
   
         // Store what the service gave us as the high scores
-        const saved = await response.json();
+        saved = await response.json();
       } catch {
         // If there was an error then just track scores locally
         console.log("Could not save.");
@@ -147,11 +147,14 @@ async function saveAnagram()
     }
 
     anagramBuilder.savedAnagrams = [];
-
+    console.log(saved);
+    let nChild;
     for (an of saved)
     {
-        anagramBuilder.sidebar.appendChild(saved.anagram);
-        anagramBuilder.savedAnagrams.push(saved.anagram);
+        nChild = await makeNewSavedAnagramElement(an.anagram.word, an.anagram.txt);
+        console.log(nChild);
+        anagramBuilder.sidebar.appendChild(nChild);
+        anagramBuilder.savedAnagrams.push(nChild);
     }
 }
 
@@ -192,6 +195,23 @@ async function makeNewSavedAnagram(txt)
     newAnagram.id = await anagramBuilder.getNextId();
     newAnagram.textContent = "Word: " + anagramBuilder.inputTextBox.textContent + " Anagram: " + txt;
     return newAnagram;
+}
+
+async function makeNewSavedAnagramElement(word, txt)
+{
+    let newAnagram = document.createElement("div");
+    newAnagram.classList.add("card");
+    newAnagram.id = await anagramBuilder.getNextId();
+    newAnagram.textContent = "Word: " + word + " Anagram: " + txt;
+    return newAnagram;
+}
+
+function makeSavedAnagramObj(txt)
+{
+return {
+    word: anagramBuilder.inputTextBox.textContent,
+    anagram: txt
+}
 }
 
 async function makeNewSharedAnagram(txt)

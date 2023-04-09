@@ -39,12 +39,15 @@ async function createUser(email, password) {
 }
 
 async function addSavedAnagram(anagram) {
+  console.log(anagram)
   //Get the list of saved anagrams from the database
-  let curr_saved = await getSavedAnagrams(anagram.curr_user);
+  let curr_saved = await getSavedAnagrams(anagram.user);
+  let existed = true;
 
-  if (curr_saved.length === 0)
+  if ((!curr_saved) || (curr_saved.length === 0))
   {
     curr_saved = [anagram];
+    existed = false;
   }
   
   //Make sure that there are less than the limit in there
@@ -54,11 +57,25 @@ async function addSavedAnagram(anagram) {
       curr_saved.shift();
       curr_saved.push(anagram);    
   }
+
+  let saved_in_db = {
+    user: anagram.user,
+    anagrams: curr_saved,
+  }
   
   //Replace the old list of saved anagrams with the new one
   try {
     const query = { user: anagram.curr_user };
-    await savedCollection.replaceOne(query, curr_saved, {});
+    if (existed)
+    {
+      await savedCollection.replaceOne(query, saved_in_db);
+      console.log("Replaced");
+    }
+    else
+    {
+      await savedCollection.insertOne(saved_in_db);
+    }
+    
   }
   catch (e) {
     console.log(e);
@@ -69,15 +86,13 @@ async function getSavedAnagrams(user)
 {
   //Get the list of saved anagrams from the database
   const query = { user: user };
-  const options = { date: -1 };
+  const options = {};
   let cursor = null;
   let curr_saved = null;
 
   try
   {
-    console.log("HERE");
-    cursor = await savedCollection.find(query, options)
-    console.log("But not here");
+    cursor = await savedCollection.find(query, options);
   }
   catch (e)
   {
@@ -85,28 +100,14 @@ async function getSavedAnagrams(user)
       return [];
   }
 
-  //check to see if any have been saved yet.
-  //If not, create an empty array
-  // if (!cursor.hasNext())
-  // {
-  //   curr_saved = [];
-  // }
-  // else
-  // {
-  //   try
-  //   {
-  //       curr_saved = await cursor.toArray();
-  //   }
-  //   catch (e)
-  //   {
-  //     console.log(e)
-  //   }
-    
-  // }
+  curr_saved = await cursor.next();
 
-  curr_saved = await cursor.toArray();
+  if (!curr_saved)
+  {
+    return [];
+  }
 
-  return curr_saved;
+  return curr_saved.anagrams;
 }
 
 module.exports = {
