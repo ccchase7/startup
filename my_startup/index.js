@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const app = express();
 const DB = require('./database.js');
+const words = require('./words.js');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -15,6 +16,9 @@ app.use(express.json());
 
 // Serve up the front-end static content hosting
 app.use(express.static('my_startup/public'));
+
+// Use the cookie parser middleware for tracking authentication tokens
+app.use(cookieParser());
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -60,6 +64,17 @@ apiRouter.delete('/auth/logout', (_req, res) => {
   res.status(204).end();
 });
 
+// GetUser returns information about a user
+apiRouter.get('/user/:email', async (req, res) => {
+  const user = await DB.getUser(req.params.email);
+  if (user) {
+    const token = req?.cookies.token;
+    res.send({ email: user.email, authenticated: token === user.token });
+    return;
+  }
+  res.status(404).send({ msg: 'Unknown' });
+});
+
 
 //Setting the auth cookie in the response
 function setAuthCookie(res, authToken) {
@@ -95,7 +110,11 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 
-
+// GetEnglishWords
+secureApiRouter.get('/words', async (req, res) => {
+  const englishWords = words.getWords();
+  res.send(englishWords);
+});
 
 
 

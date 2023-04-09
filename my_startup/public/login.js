@@ -108,3 +108,29 @@ class LoginHelper
 }
 
 const loginHelper = new LoginHelper();
+
+(async () => {
+    let authenticated = false;
+    const username = localStorage.getItem('userName');
+    if (username) {
+      const user = await getUser(username);
+      authenticated = user?.authenticated;
+    }
+  
+    if (authenticated) {
+      loginHelper.initialSetup(true);
+    } else {
+      loginHelper.initialSetup(false);
+    }
+  })();
+
+  async function getUser(email) {
+    let scores = [];
+    // See if we have a user with the given email.
+    const response = await fetch(`/api/user/${email}`);
+    if (response.status === 200) {
+      return response.json();
+    }
+  
+    return null;
+  }
