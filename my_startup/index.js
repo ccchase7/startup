@@ -109,6 +109,29 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
+// SubmitScore
+secureApiRouter.post('/save', async (req, res) => {
+  authToken = req.cookies[authCookieName];
+  const curr_user = await DB.getUserByToken(authToken);
+  const currDate = new Date().toLocaleDateString();
+
+  const savedAnagram = {
+    user: curr_user,
+    anagram: req.body,
+    timestamp: currDate,
+    limit: 10
+  }
+
+  await DB.addSavedAnagram(curr_user);
+
+  const allSaved = await DB.getSavedAnagrams();
+  res.send(allSaved);
+});
+
+secureApiRouter.get('/saved', async (req, res) => {
+  const saved = await DB.getSavedAnagrams();
+  res.send(saved);
+});
 
 // GetEnglishWords
 secureApiRouter.get('/words', async (req, res) => {

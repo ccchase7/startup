@@ -124,16 +124,35 @@ async function saveAnagram()
         }
     }
 
-    if (anagramBuilder.savedAnagrams.length >= ANAGRAM_LIMIT)
-    {
-        anagramBuilder.savedAnagrams.shift();
-        anagramBuilder.sidebar.removeChild(anagramBuilder.sidebar.lastChild);
+    let currAnagram = await makeNewSavedAnagram(anagramBuilder.outputTextBox.textContent);
+    
+
+    try {
+        const response = await fetch('/api/save', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(currAnagram),
+        });
+  
+        // Store what the service gave us as the high scores
+        const saved = await response.json();
+      } catch {
+        // If there was an error then just track scores locally
+        console.log("Could not save.");
     }
 
-    let currAnagram = await makeNewSavedAnagram(anagramBuilder.outputTextBox.textContent);
+    while (anagramBuilder.sidebar.firstChild)
+    {
+        anagramBuilder.sidebar.removeChild(anagramBuilder.sidebar.firstChild);
+    }
 
-    anagramBuilder.savedAnagrams.push(currAnagram);
-    sidebar.insertBefore(currAnagram, sidebar.firstChild);
+    anagramBuilder.savedAnagrams = [];
+
+    for (an of saved)
+    {
+        anagramBuilder.sidebar.appendChild(saved.anagram);
+        anagramBuilder.savedAnagrams.push(saved.anagram);
+    }
 }
 
 async function shareAnagram()
