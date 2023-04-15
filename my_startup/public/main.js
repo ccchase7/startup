@@ -110,6 +110,7 @@ class AnagramBuilder
 }
 
 let anagramBuilder;
+let socket = null;
 let inbox;
 let outbox;
 
@@ -144,8 +145,6 @@ async function login()
 
 async function saveAnagram()
 {
-    let sidebar = anagramBuilder.sidebar;
-
     if (anagramBuilder.outputTextBox.textContent === noAnagramString)
     {
         return;
@@ -228,10 +227,10 @@ async function shareAnagram()
     broadcastEvent(anagramBuilder.inputTextBox.textContent, anagramBuilder.outputTextBox.textContent);
 }
 
-function displayNewSharedAnagram(msg)
+async function displayNewSharedAnagram(msg)
 {
     let shareBar = document.getElementById("shared-anagrams");
-    currAnagram = makeNewSharedAnagram(msg.user, msg.word, msg.anagram)
+    let currAnagram = await makeNewSharedAnagram(msg.user, msg.word, msg.anagram);
 
     if (anagramBuilder.sharedAnagrams.length >= ANAGRAM_LIMIT)
     {
@@ -241,8 +240,10 @@ function displayNewSharedAnagram(msg)
 
     anagramBuilder.sharedAnagrams.push(currAnagram);
 
-    if (shareBar.hasChildNodes)
+    if (shareBar.firstChild)
     {
+        console.log("HERE");
+        console.log(shareBar.firstChild);
         shareBar.insertBefore(currAnagram, shareBar.firstChild);
     }
     else
@@ -260,13 +261,11 @@ async function makeNewSharedAnagram(usr, wrd, txt)
     return newAnagram;
 }
 
-let socket;
-
 async function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     socket.onopen = (event) => {};
-    socket.onclose = (event) => {};
+    socket.onclose = (event) => {console.log("Closing...")};
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === shareAnagramEvent) {

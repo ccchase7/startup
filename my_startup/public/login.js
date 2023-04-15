@@ -3,12 +3,14 @@ class LoginHelper
     msgElement;
     usernameBox;
     passwordBox;
+    isSocket;
     
     constructor()
     {
         this.msgElement = document.getElementById("login-register-message");
         this.usernameBox = document.getElementById("username-textbox");
         this.passwordBox = document.getElementById("password-textbox");
+        this.isSocket = false;
     }
 
     async loginFromEnter(event)
@@ -89,12 +91,6 @@ class LoginHelper
         document.getElementById("logout").hidden = !on_off;
         document.getElementById("everything").hidden = !on_off;
 
-        
-        anagramBuilder = new AnagramBuilder();
-
-        inbox = anagramBuilder.inputTextBox;
-        outbox = anagramBuilder.outputTextBox;
-
         if(on_off)
         {
             document.getElementById("main-title").style.textAlign = "center";
@@ -108,7 +104,21 @@ class LoginHelper
 
         if (on_off)
         {
+            anagramBuilder = new AnagramBuilder();
             anagramBuilder.loadSavedAnagrams();
+            configureWebSocket();
+            this.isSocket = true;
+
+
+            inbox = anagramBuilder.inputTextBox;
+            outbox = anagramBuilder.outputTextBox;
+        }
+        else{
+          if (this.isSocket)
+          {
+            socket.close();
+            this.isSocket = false;
+          }
         }
     }
 
