@@ -569,6 +569,21 @@ Notes from Startup Javascript:
 Notes from Startup Service:
     - You have to await cursor.next() (and all the database operations, or else the program will continue on without you
     and get mad that you didn't wait)
+    - If you want to delete something from the database and have it returned back to you (maybe so you can update it),
+    you can use findOneAndDelete(query, options) where the thing you want to delete matches your query (and your options)
+    is probably empty)
+        - this returns an object where the "value" attribute is what you got back, if it's null that means there wasn't
+        any match in there to delete.
+    - You pass things via objects, so it's best to keep the object attributes consistent that way you don't end up with
+    random undefineds everywhere
+    - You have to make sure to reset the whole UI when a user logs out otherwise the next person who logs in will end up
+    with all their stuff
+    - When you're loading in their items, you can make / use a funciton that gets their username based on their auth so
+    you don't have to worry about sending "who it is" every time, since it kind of already does that for you
+    
+
+
+
     
 </details>
 
