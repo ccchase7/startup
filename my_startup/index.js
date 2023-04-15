@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const app = express();
 const DB = require('./database.js');
 const words = require('./words.js');
+const { PeerProxy } = require('./peerProxy.js');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -147,8 +148,10 @@ secureApiRouter.get('/words', async (req, res) => {
 
 
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+new PeerProxy(httpService);
 
 

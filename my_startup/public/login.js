@@ -89,6 +89,12 @@ class LoginHelper
         document.getElementById("logout").hidden = !on_off;
         document.getElementById("everything").hidden = !on_off;
 
+        
+        anagramBuilder = new AnagramBuilder();
+
+        inbox = anagramBuilder.inputTextBox;
+        outbox = anagramBuilder.outputTextBox;
+
         if(on_off)
         {
             document.getElementById("main-title").style.textAlign = "center";

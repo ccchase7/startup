@@ -331,6 +331,17 @@ Data Services:
             - const cursor = collection.find();
             - const rentals = await cursor.toArray()
 
+WebSockets:
+    - In a simple webSocket server, you establish a connection over http then you upgrade that connection to a WebSocket
+    connection. However, you can also specify const wss = new WebSocketServer({ noServer: true }); to say that you want
+    to not use the http request and instead do it explicitly by later specifying the handler method that should be called.
+        - server.on('upgrade')... which should call the handleUpgrade request then emit the new connection when that succeeds
+    - Once you define how your webSocket server is set up, then define what should happen on 1. a new 'connection' (add it to your
+    list of connections), 2. what happens when you get a 'message' (go through your list of connections and send them each the message)
+    and 3. what happens when a connection is 'close'd (remove it from your list).
+    - websocket connections will close if nothing is sent for a while, so you ping/pong to keep them alive and close them if they don't
+    respond.
+
 Web Frameworks / React:
     - React: Requires a transpiler (goes through and runs the code so it can construct the html), you build the html out of code and html.
     - You can pass informatino to the react components via element properties.

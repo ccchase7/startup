@@ -1,4 +1,5 @@
 const noAnagramString = "No Anagram Found";
+const shareAnagramEvent = 'shareAnagram';
 const ANAGRAM_LIMIT = 10;
 class AnagramBuilder
 {
@@ -108,13 +109,9 @@ class AnagramBuilder
 
 }
 
-const anagramBuilder = new AnagramBuilder();
-
-inbox = anagramBuilder.inputTextBox;
-outbox = anagramBuilder.outputTextBox;
-
-
-
+let anagramBuilder;
+let inbox;
+let outbox;
 
 function clearInputOutput()
 {
@@ -126,7 +123,7 @@ function clearInputOutput()
 function logout()
 {
     clearInputOutput();
-    anagramBuilder.inputTextBox = "Input a word";
+    anagramBuilder.inputTextBox.value = "Input a word";
     removeSaved(anagramBuilder.sidebar);
     removeSaved(document.getElementById("shared-anagrams"));
     loginHelper.logout();
@@ -200,51 +197,12 @@ async function displayAnagrams(saved)
     }
 }
 
-async function shareAnagram()
-{
-    let shareBar = document.getElementById("shared-anagrams");
-
-    if (anagramBuilder.outputTextBox.textContent === "")
-    {
-        return;
-    }
-
-    if (anagramBuilder.sharedAnagrams.length >= ANAGRAM_LIMIT)
-    {
-        anagramBuilder.sharedAnagrams.shift();
-        shareBar.removeChild(shareBar.lastChild);
-    }
-
-    let currAnagram = await makeNewSharedAnagram(anagramBuilder.outputTextBox.textContent);
-
-    anagramBuilder.sharedAnagrams.push(currAnagram);
-
-    if (shareBar.hasChildNodes)
-    {
-        shareBar.insertBefore(currAnagram, shareBar.firstChild);
-    }
-    else
-    {
-        shareBar.appendChild(currAnagram);
-    }
-    
-}
-
 function removeSaved(el)
 {
     while (el.firstChild)
     {
         el.removeChild(el.firstChild);
     }
-}
-
-async function makeNewSavedAnagram(txt)
-{
-    let newAnagram = document.createElement("div");
-    newAnagram.classList.add("card");
-    newAnagram.id = await anagramBuilder.getNextId();
-    newAnagram.textContent = "Word: " + anagramBuilder.inputTextBox.textContent + " Anagram: " + txt;
-    return newAnagram;
 }
 
 async function makeNewSavedAnagramElement(word, txt)
@@ -258,23 +216,80 @@ async function makeNewSavedAnagramElement(word, txt)
 
 function makeSavedAnagramObj(txt)
 {
-return {
-    word: anagramBuilder.inputTextBox.textContent,
-    anagram: txt
-}
+    return {
+        word: inbox.textContent,
+        anagram: txt
+    }
 }
 
-async function makeNewSharedAnagram(txt)
+async function shareAnagram()
+{
+    console.log("Sharing...");
+    broadcastEvent(anagramBuilder.inputTextBox.textContent, anagramBuilder.outputTextBox.textContent);
+}
+
+function displayNewSharedAnagram(msg)
+{
+    let shareBar = document.getElementById("shared-anagrams");
+    currAnagram = makeNewSharedAnagram(msg.user, msg.word, msg.anagram)
+
+    if (anagramBuilder.sharedAnagrams.length >= ANAGRAM_LIMIT)
+    {
+        anagramBuilder.sharedAnagrams.shift();
+        shareBar.removeChild(shareBar.lastChild);
+    }
+
+    anagramBuilder.sharedAnagrams.push(currAnagram);
+
+    if (shareBar.hasChildNodes)
+    {
+        shareBar.insertBefore(currAnagram, shareBar.firstChild);
+    }
+    else
+    {
+        shareBar.appendChild(currAnagram);
+    }
+}
+
+async function makeNewSharedAnagram(usr, wrd, txt)
 {
     let newAnagram = document.createElement("div");
     newAnagram.classList.add("card");
     newAnagram.id = await anagramBuilder.getNextId();
-    let user = localStorage.getItem("userName");
-    newAnagram.textContent = user + ": " +  "Word: " + anagramBuilder.inputTextBox.textContent + " Anagram: " + txt;
+    newAnagram.textContent = usr + " shared: " +  "Word: " + wrd + " Anagram: " + txt;
     return newAnagram;
 }
 
+let socket;
 
+async function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {};
+    socket.onclose = (event) => {};
+    socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === shareAnagramEvent) {
+        displayNewSharedAnagram(msg);
+      }
+    };
+  }
+
+  async function displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+  }
+
+  async function broadcastEvent(wrd, angram) {
+    const event = {
+        user: localStorage.getItem("userName"),
+        word: wrd,
+        anagram: angram,
+        type: shareAnagramEvent
+        }
+    socket.send(JSON.stringify(event));
+  }
 
 
 
