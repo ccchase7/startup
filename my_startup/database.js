@@ -39,15 +39,16 @@ async function createUser(email, password) {
 }
 
 async function addSavedAnagram(anagram) {
-  console.log(anagram)
   //Get the list of saved anagrams from the database
-  let curr_saved = await getSavedAnagrams(anagram.user);
-  let existed = true;
+  let curr_saved = await getAndDeleteSavedAnagrams(anagram.user);
 
   if ((!curr_saved) || (curr_saved.length === 0))
   {
-    curr_saved = [anagram];
-    existed = false;
+    curr_saved = [anagram.anagram];
+  }
+  else
+  {
+    curr_saved.push(anagram.anagram);
   }
   
   //Make sure that there are less than the limit in there
@@ -55,8 +56,8 @@ async function addSavedAnagram(anagram) {
   if (curr_saved.length > anagram.limit)
   {
       curr_saved.shift();
-      curr_saved.push(anagram);    
   }
+   
 
   let saved_in_db = {
     user: anagram.user,
@@ -65,17 +66,7 @@ async function addSavedAnagram(anagram) {
   
   //Replace the old list of saved anagrams with the new one
   try {
-    const query = { user: anagram.curr_user };
-    if (existed)
-    {
-      await savedCollection.replaceOne(query, saved_in_db);
-      console.log("Replaced");
-    }
-    else
-    {
-      await savedCollection.insertOne(saved_in_db);
-    }
-    
+    await savedCollection.insertOne(saved_in_db);
   }
   catch (e) {
     console.log(e);
@@ -108,6 +99,31 @@ async function getSavedAnagrams(user)
   }
 
   return curr_saved.anagrams;
+}
+
+async function getAndDeleteSavedAnagrams(user)
+{
+  //Get the list of saved anagrams from the database
+  const query = { user: user };
+  const options = {};
+  let cursor = null;
+
+  try
+  {
+    cursor = await savedCollection.findOneAndDelete(query, options);
+  }
+  catch (e)
+  {
+      console.log(e)
+      return [];
+  }
+  
+  if (!cursor.value)
+  {
+    return [];
+  }
+
+  return cursor.value.anagrams;
 }
 
 module.exports = {

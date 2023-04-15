@@ -15,7 +15,7 @@ const authCookieName = 'token';
 app.use(express.json());
 
 // Serve up the front-end static content hosting
-app.use(express.static('my_startup/public'));
+app.use(express.static('public'));
 
 // Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
@@ -123,11 +123,16 @@ secureApiRouter.post('/save', async (req, res) => {
   await DB.addSavedAnagram(savedAnagram);
 
   const allSaved = await DB.getSavedAnagrams(curr_user.email);
+  
+  console.log("Sending back " + allSaved)
   res.send(allSaved);
 });
 
-secureApiRouter.get('/saved', async (req, res) => {
-  const saved = await DB.getSavedAnagrams();
+secureApiRouter.post('/saved', async (req, res) => {
+  const curr_user = await DB.getUserByToken(authToken);
+  
+  const saved = await DB.getSavedAnagrams(curr_user.email);
+  console.log("Sending back " + saved)
   res.send(saved);
 });
 

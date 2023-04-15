@@ -99,6 +99,11 @@ class LoginHelper
             document.getElementById("password-textbox").value = "";
             document.getElementById("main-title").style.textAlign = "right";
         }
+
+        if (on_off)
+        {
+            anagramBuilder.loadSavedAnagrams();
+        }
     }
 
     setMessage(msg)
@@ -118,7 +123,7 @@ const loginHelper = new LoginHelper();
     }
   
     if (authenticated) {
-      loginHelper.initialSetup(true);
+      await loginHelper.initialSetup(true);
     } else {
       loginHelper.initialSetup(false);
     }

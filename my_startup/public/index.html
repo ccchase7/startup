@@ -27,7 +27,7 @@
         </div>
         <div id="login-register-buttons">
             <div>
-                <button type="button" id="login-btn" class="btn btn-primary" onclick="loginHelper.login()">Login</button>
+                <button type="button" id="login-btn" class="btn btn-primary" onclick="login()">Login</button>
                 <button type="button" id="register-btn" class="btn btn-primary" onclick="loginHelper.register()">Register</button>
             </div>
             <div>
@@ -36,13 +36,13 @@
                     <input class="login-register" id="username-textbox"></input>
                     <br>
                     <label for="username-textbox">Password:</label>
-                    <input class="login-register" type="password" id="password-textbox" onkeypress="loginHelper.loginFromEnter(event)"></input>
+                    <input class="login-register" type="password" id="password-textbox" onkeypress="loginFromEnter(event)"></input>
                 </form>
             </div>
         </div>
         <div id="logout" hidden>
             <div>
-                <button type="button" id="logout" class="btn btn-primary" onclick="loginHelper.logout()">Logout</button>
+                <button type="button" id="logout" class="btn btn-primary" onclick="logout()">Logout</button>
             </div>
         </div>
         
@@ -62,7 +62,7 @@
                 <div id="main-title"><p id="main-title-text">Create Your Anagram Here</p></div>
                 <hr />
                 <div id="input-area">
-                    <div id="input-string" ><textarea id="input-textbox" class="form-control" onkeypress="anagramBuilder.detectEnterOrSpace(event)">dda</textarea></div>
+                    <div id="input-string" ><textarea id="input-textbox" class="form-control" onkeypress="anagramBuilder.detectEnterOrSpace(event)">Input a word</textarea></div>
                     <div id="button-area">
                         <div class="button-group">
                             <button type="button" class="btn btn-outline-primary" onclick="anagramBuilder.getAnagram()">Generate</button>

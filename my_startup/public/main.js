@@ -77,6 +77,27 @@ class AnagramBuilder
 
     async loadSavedAnagrams()
     {
+        console.log("DISPLAYING SAVED");
+        let saved = null;
+        try {
+            const response = await fetch('/api/saved', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+            });
+      
+            // Store what the service gave us as the high scores
+            saved = await response.json();
+          } catch (e) {
+            // If there was an error then just track scores locally
+            console.log("Could not get saved anagrams.");
+            console.log(e);
+        }
+    
+        if (saved.length > 0)
+        {
+            displayAnagrams(saved);
+        }
+        
         return 0;
     }
 
@@ -88,7 +109,6 @@ class AnagramBuilder
 }
 
 const anagramBuilder = new AnagramBuilder();
-anagramBuilder.loadSavedAnagrams();
 
 inbox = anagramBuilder.inputTextBox;
 outbox = anagramBuilder.outputTextBox;
@@ -101,6 +121,28 @@ function clearInputOutput()
     anagramBuilder.inputTextBox.value = "";
     anagramBuilder.outputTextBox.textContent = "";
     anagramBuilder.inputTextBox.focus();
+}
+
+function logout()
+{
+    clearInputOutput();
+    anagramBuilder.inputTextBox = "Input a word";
+    removeSaved(anagramBuilder.sidebar);
+    removeSaved(document.getElementById("shared-anagrams"));
+    loginHelper.logout();
+}
+
+async function loginFromEnter(event)
+    {
+        if ((event.keyCode === 13)) {
+            await loginHelper.login();
+        }
+    }
+
+async function login()
+{
+    await loginHelper.login();
+    anagramBuilder.loadSavedAnagrams();
 }
 
 async function saveAnagram()
@@ -141,19 +183,19 @@ async function saveAnagram()
         console.log("Could not save.");
     }
 
-    while (anagramBuilder.sidebar.firstChild)
-    {
-        anagramBuilder.sidebar.removeChild(anagramBuilder.sidebar.firstChild);
-    }
+    displayAnagrams(saved);
+}
+
+async function displayAnagrams(saved)
+{
+    removeSaved(anagramBuilder.sidebar);
 
     anagramBuilder.savedAnagrams = [];
-    console.log(saved);
     let nChild;
     for (an of saved)
     {
-        nChild = await makeNewSavedAnagramElement(an.anagram.word, an.anagram.txt);
-        console.log(nChild);
-        anagramBuilder.sidebar.appendChild(nChild);
+        nChild = await makeNewSavedAnagramElement(an.word, an.anagram);
+        anagramBuilder.sidebar.insertBefore(nChild, anagramBuilder.sidebar.firstChild);
         anagramBuilder.savedAnagrams.push(nChild);
     }
 }
@@ -186,6 +228,14 @@ async function shareAnagram()
         shareBar.appendChild(currAnagram);
     }
     
+}
+
+function removeSaved(el)
+{
+    while (el.firstChild)
+    {
+        el.removeChild(el.firstChild);
+    }
 }
 
 async function makeNewSavedAnagram(txt)
