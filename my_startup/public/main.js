@@ -12,9 +12,10 @@ class AnagramBuilder
     lastSaved;
     words;
     saveButton;
+    username;
     
 
-    constructor()
+    constructor(username)
     {
         this.outputTextBox = document.getElementById("answer-text");
         this.inputTextBox = document.getElementById("input-textbox");
@@ -24,6 +25,7 @@ class AnagramBuilder
         this.sharedAnagrams = [];
         this.saveButton = document.getElementById("save-button");
         this.words = null;
+        this.username = username;
     }
 
     async loadWords()
@@ -78,7 +80,6 @@ class AnagramBuilder
 
     async loadSavedAnagrams()
     {
-        console.log("DISPLAYING SAVED");
         let saved = null;
         try {
             const response = await fetch('/api/saved', {
@@ -223,7 +224,6 @@ function makeSavedAnagramObj(txt)
 
 async function shareAnagram()
 {
-    console.log("Sharing...");
     broadcastEvent(anagramBuilder.inputTextBox.textContent, anagramBuilder.outputTextBox.textContent);
 }
 
@@ -242,8 +242,6 @@ async function displayNewSharedAnagram(msg)
 
     if (shareBar.firstChild)
     {
-        console.log("HERE");
-        console.log(shareBar.firstChild);
         shareBar.insertBefore(currAnagram, shareBar.firstChild);
     }
     else
@@ -265,7 +263,7 @@ async function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     socket.onopen = (event) => {};
-    socket.onclose = (event) => {console.log("Closing...")};
+    socket.onclose = (event) => {};
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === shareAnagramEvent) {
@@ -282,7 +280,7 @@ async function configureWebSocket() {
 
   async function broadcastEvent(wrd, angram) {
     const event = {
-        user: localStorage.getItem("userName"),
+        user: anagramBuilder.username,
         word: wrd,
         anagram: angram,
         type: shareAnagramEvent

@@ -104,7 +104,7 @@ class LoginHelper
 
         if (on_off)
         {
-            anagramBuilder = new AnagramBuilder();
+            anagramBuilder = new AnagramBuilder(document.getElementById("username-textbox").value);
             anagramBuilder.loadSavedAnagrams();
             configureWebSocket();
             this.isSocket = true;

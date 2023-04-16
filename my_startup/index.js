@@ -130,6 +130,7 @@ secureApiRouter.post('/save', async (req, res) => {
 });
 
 secureApiRouter.post('/saved', async (req, res) => {
+  authToken = req.cookies[authCookieName];
   const curr_user = await DB.getUserByToken(authToken);
 
   const saved = await DB.getSavedAnagrams(curr_user.email);
