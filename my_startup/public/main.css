@@ -30,6 +30,11 @@ header #main-title {
     text-align: center;
 }
 
+#quote {
+    padding: .5em;
+    text-align: center;
+}
+
 header #login-register-buttons {
     flex: 9;
     text-align: right;

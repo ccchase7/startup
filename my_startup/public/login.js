@@ -90,6 +90,7 @@ class LoginHelper
         document.getElementById("login-register-buttons").hidden = on_off;
         document.getElementById("logout").hidden = !on_off;
         document.getElementById("everything").hidden = !on_off;
+        document.getElementById("login-quote").hidden = on_off;
 
         if(on_off)
         {
@@ -108,7 +109,6 @@ class LoginHelper
             anagramBuilder.loadSavedAnagrams();
             configureWebSocket();
             this.isSocket = true;
-
 
             inbox = anagramBuilder.inputTextBox;
             outbox = anagramBuilder.outputTextBox;
