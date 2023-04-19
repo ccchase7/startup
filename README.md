@@ -591,6 +591,13 @@ Notes from Startup Service:
     with all their stuff
     - When you're loading in their items, you can make / use a funciton that gets their username based on their auth so
     you don't have to worry about sending "who it is" every time, since it kind of already does that for you
+    - Calling a third-party endpoint is pretty much the same as using an endpoint I created: just call it and set up the
+    callbacks and next functions based on what I expect to get back from them.
+    - If you save the css, it doesn't update on the website until you refresh (even though it did before) because your
+    browser is asking the service for the files, and gets a copy of them from the server, so when the server changes
+    the file the browser will still have the old copy until it requests the new one again
+    - You have to explicitly close the webSocket when you logout otherwise it'll think it's still going and you'll run
+    into problems where it's got the wrong auth associated with the socket that's open and you'll get your own messages.
     
 
 
