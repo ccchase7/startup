@@ -228,13 +228,18 @@ How to Javascript:
             - Run your code with node main.js
 
 Web Services:
+    Front-end: Everything running in the browser.
     - url:
         - url: uniform resource locator. http = protocol = scheme. then domain name.
             - instead of l, it could be n (for name) or i (identifier)
         - "< scheme>://< domain name>:< port>/< path>?< parameters>#< anchor>"
+        - (anchor: maybe hash, or fragmentID, sub-location)
+        - urn (name, not location), uri (either)
     - port:
         - Allows for multiple protocols or multiple types of services.
-        - Famous ports: 20:ftp, 22:ssh, 25:SMTP (email), 53:dns lookup, 80:http, 443:https;
+        - Famous ports: 20:ftp, 22:ssh, 25:SMTP (email), 53:dns lookup, 80:http, 110:email, 123:ntp (time),
+        161:simple network management, 194:internet-relay-chat, 443:https;
+            - CADDY is listening on both 80 and 443.
         - (caddy is listening on 80 and 443) (80 auto-redirects to 443)
     - http:
         - Request:
@@ -244,6 +249,7 @@ Web Services:
 
                 < body>
             ]
+            (body is 2 lines after the header)
         - you can specify the type of resource with "Accept:" (like "text/html")(image/png)
         (text/javascript)(application/json) (has to be MIME type)
         - Response:
@@ -260,22 +266,69 @@ Web Services:
             - DELETE: delete
             - OPTIONS: get metadata, not resource.
         - Response Codes:
-            - 1: info. 2: success. 3: redirect. 4: client error. 5: server error
+            - 1: info. 2: success. 3: redirect / caching. 4: client error. 5: server error
+                - 100:continue. 200 success. 201 created. 204 no content. 304 not modified. 307 permanent redir.
+                308 temp redir. 400 bad request. 401 unauthorized. 403 forbidden. 404 not found. 408 request timed out.
+                409 conflict. 418 teapot. 429 too many requests. 500 internal server error. 503 unavailable (try exp. backoff)
         - Cookies:
             -server tells client what data to store with "Set-Cookie:" header, then client adds that on
             to subsequent requests.
-            - Lets server remember things about client.
+            - Lets server "remember" things about client.
+        - Standard HTTP headers:
+            - Authorization, Accept, Content-type, Host, Cookie, Origin, Access-Control-Allow-Origin, Content-Length, Cache-Control,
+            User-Agent (client application/ browser)......
         - CORS and SOP
             - CORS: Cross Origin Resource Sharing (gets around SOP). SOP is default, but pretty much it
             asks "where else am I allowed to get content from" before it shows that content.
             - SOP: Same Origin Policy. javascript can't request something from a domain that the user is
             not viewing.
-            - you have to be on the "access-control-allow-origin:" list if you want to use their stuff.
-    - Designing an API:
-        - RPC: Remote Procedure Calls (simple function calls) (couples API and implementation, :( )
-        - REST: Representational State Transfer (acts on a resource.)
-        - GraphQL: just exposes one endpoint and sends a query, and the server can process a lot at once
-        instead of making the client send a ton of requests. Database stuff.
+            - you have to be on the "access-control-allow-origin:" list if you want to use their stuff. * is everyone.
+        - http requests are STATELESS.
+        - 90, 96, 97, 15, 22
+    - Fetch:
+        - fetch takes a URL and returns a promise. The "then" on the promise takes you to the callback function (which is asynchronously
+        called when the request returns.)
+        - fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                    title: 'test title',
+                    body: 'test body',
+                    userId: 1,
+                    }),
+                    headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((jsonResponse) => {
+                    console.log(jsonResponse);
+                    });
+            - The second parameter to fetch is options, that's were you put the http method and headers. You can tag the callback functions on
+            to the end of the fetch call with ".then"...
+    - Designing an API (Application Programming Interface):
+        - Ease, performance, extensible, cost-efficient
+        - You act on a resource with a verb
+        - Models for exposing Endpoints:
+            - RPC: Remote Procedure Calls (simple function calls) (couples API and implementation, (client knows inner workings of server)
+                - Mostly just uses POST
+            - REST: Representational State Transfer (acts on a resource.)
+                - Allows for optimal caching
+            - GraphQL: just exposes one endpoint and sends a query, and the server can process a lot at once
+                - Focuses on manipulation of data
+                - Decreases number of calls, instead of making the client send a ton of requests. Database stuff.
+    - Node.js
+        - first app that could deploy JS ourside a browser.
+        - Often helpful to use existing packages
+            - Install the package locally
+            - use a "require" statement in code
+        - npm init to let it know you want to use packages.
+            - creates package.json
+                - Metadata (name, default .js file)
+                - commands for running, testing, distributing
+                - packages your project depends on
+        - npm install or npm uninstall
+        - you want node-modules in your .gitignore file.
+
 
     - Express:
         - It's a Node package that helps you make a production-ready server. "creating and using http
@@ -284,6 +337,11 @@ Web Services:
         2. const express = require('express');
         3. const app = express();
         4. app.listen(PORT);
+
+            - routing requests for endpoints
+            - manipulating HTTP requests with JSON body
+            - generating HTTP responses
+            - using middleware
 
         - Http routing (you get a request, you send it somewhere.)
         5. Add routes (endpoints)
@@ -312,6 +370,27 @@ Web Services:
                 });
         - cookie-parser is a package that makes it easy to use cookies.
 
+    - Express is the mediator, the functions you write are the middleware components.
+        - Middleware functions are always called for every HTTP request unless a preceeding middleware function does not call next.
+        - pretty much, just a bunch of app.use((req, res, next) => {}) that all go in order unless you don't call next()
+
+    - Making it a Daemon:
+        - daemon: it is a permanent process that runs in the background, even when you close the console. 
+            1. add rule to Caddyfile
+                - includes restarting Caddy to load changes.
+            2. add files for web service
+            3. configure PM2 to host the webservice
+                - go to directory
+                - pm2 start <file.js> -n <name> -- <port>
+                - pm2 save
+
+    - Playwright for automated UI tests, BrowserStack for testing on various devices.
+    - Jest for testing endpoints
+        - test function in xxx.test.js
+        - "test": "jest" in scripts
+        - npm run test
+
+
 Data Services:
     - MongoDB is a NoSQL (it dowsn't rely on relational database paradigms) database that us useful for JSON
     objects
@@ -322,6 +401,7 @@ Data Services:
         - const userName = 'username';
         - const password = 'password';
         - const hostname = 'hostname';
+        * Save credentials in environmental variables, get them out with: const userName = process.env.MONGOUSER;
         * const uri = \`mongodb+srv://${userName}:${password}@${hostname}`;
         - const client = new MongoClient(uri); #creates an instance of the MongoClient class.
     3. From the client object, you can get a database object, and from there you can get a collection object.
@@ -330,6 +410,14 @@ Data Services:
         - To retreive an object use ".find()" (it's asynchronous)
             - const cursor = collection.find();
             - const rentals = await cursor.toArray()
+
+Authentication:
+    - SSO (Single Sign On) ex. use your github creds to sign in to something else
+    - Federated login: Sign in to one website and you can sign in to others, like gmail and youtube
+    - use uuid for tokens, bcrypt to hash
+    - don't store plain text passwords
+
+
 
 WebSockets:
     - In a simple webSocket server, you establish a connection over http then you upgrade that connection to a WebSocket
@@ -341,15 +429,33 @@ WebSockets:
     and 3. what happens when a connection is 'close'd (remove it from your list).
     - websocket connections will close if nothing is sent for a while, so you ping/pong to keep them alive and close them if they don't
     respond.
+    - ws: non-secure. wss: secure. check window.location.protocol to see which.
+        - const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        - const socket = new WebSocket('$ '{' protocol}://${window.location.host}/ws);
 
 Web Frameworks / React:
     - React: Requires a transpiler (goes through and runs the code so it can construct the html), you build the html out of code and html.
-    - You can pass informatino to the react components via element properties.
+        - JS and HTML in one place, but CSS must be declared outside JSX file.
+        - react.createElement() generates DOM elements and monitors them for changes, and reacts to the changes.
+    - You can pass information to the react components via element properties.
     - React can store a "state" (created by calling React.useState) that can be updated and rendered.
         - "state" is the data you want to display when the component is rendered
         - "render()" is the function, its output is the component.
+            - "whatever is returned from the render function is inserted into the component html element"
     - The react framework is like the "builder", you change it up in a lower-cost way and then when it's done it'll change the DOM to mirror it.
     - props, state, and render.
+        JSX:
+        < div>
+            Component: < Demo />
+        < /div>
+
+        React Component:
+        funciton DEemo() {...}
+
+        (You can also send in properties. Component: < Demo name="name" />)
+
+
+
     Steps:
         1. define some states and the function you want to change them: [state, functionForState];
         2. Write the functions to change the states
@@ -374,7 +480,17 @@ Web Frameworks / React:
         - things like useState or useEffect
         - useEffect: you can specify what triggers useEffect by adding a dependency ([states, that, depends, on])
             - [] is for only when first rendered.
+
+            React.useEffect(() => {
+                console.log(`count1 effect triggered ${count1}`);
+            }, [count1]);
+
         - Only in function style components, only at top of scope (not inside loops, to enforce hook order)
+        - "do [this function] every time [this] happens"
+
+    Toolchain (all the things that help you get everything done):
+        - code repository *(github), Linter, prettier, transpiler *(Babel), polyfill (backward compatibility), Bundler,
+        minifier, *(WebPack) Testing, development *(bash script)
 
     React CLI:
         - Use NPX (npm install + npm start + cleanup) to run the React CLI
@@ -397,6 +513,65 @@ Web Frameworks / React:
         - You might also want to remove the test data that it adds by default.
             - Maybe you don't want them
             - Maybe you want to replace them with something else
+
+    React Router:
+        - Configure Router: wrap the app in the router. normally in index.js
+        - Define your routes (what component should it return when you ask for a given path?)
+            export function App() {
+                return (
+                    <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/books" element={<BookList />} />
+                    </Routes>
+                )
+            }
+        - Then, when your url changes, it will change the content that's in the relevant "element" attribute
+        - To navigate, in your "App", <li><Link to="/">Home</Link></li>
+        *Routes has "Route"s in it, with an element (react component) assigned to a "path".
+        *nav has <Link>s with "to" attributes that correspond to the "path" ^
+
+
+    Security (AppSec):
+        - sudo less +G /var/log/auth.log to see who has tried to access
+        - Sanitize input data, log all events, create traps that trigger alarms, educate (yourself, others), reduce attack surfaces,
+        layer security, Least Required Access Policy, 
+        - "Don't rely on obscurity" (make it secure even if everyone knew how it works)
+        
+        Top Ten:
+            - Access Control
+            - Not encrypting correctly, or using weak encryption
+            - Injection
+            - Insecure Design (specific to each system)
+            - Security Misconfiguration (ex. using default passwords, not updating software, unsecured remote config)
+            - outdated -> vulnerable
+            - ID and AUTH failure (somehow, someone logs in as someone they're not)
+            - Software and Data Integrity Failure (Should you trust this 3rd party software? maybe audit updates)
+            - Security logging and monitoring (make sure you log stuff, and in a way that they can't delete)
+            - Server Side Request Forgery (ex. if you can normally get an image by requesting it and giving a url, but instead
+            you give it the url of data it shouldn't give out, and it lets you send it, that's bad:)
+
+        - Gruyere and Juice Shop help you practice.
+
+    TypeScript:
+        - Make it a statically-typed language (compiles)
+        - You can use interfaces
+    
+    Latency:
+        - Try to keep it to one second or under. Think about browser app, network, and service endpoint
+            - network: how much you send on your requests
+            - Keep your service endpoint latency to like 10ms since they'll likely make like 20 requests
+
+    SEO (Search Engine Optimization):
+        - Content: Current, interesting, lots of it, easily accesible
+        - Authoritative Links: well-known sources should point to your application.
+        - Metadata: description, robots, social media open grapn (og), image alt attributes.
+            - robots tells the search engine how to index the page
+            - image alt tells search engine what the pictures are
+            - Makes it modern and interesting when you have all that stuff in there.
+            - og gives preview
+        - sitemap: like a map... of your site... more important for huge sites
+        - robots.txt: tell the crawler where to not go since it's not helpful
+        - performance / speed
 
 
 
